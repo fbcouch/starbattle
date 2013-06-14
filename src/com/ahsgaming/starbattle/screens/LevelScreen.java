@@ -2,11 +2,11 @@ package com.ahsgaming.starbattle.screens;
 
 import com.ahsgaming.starbattle.GameObject;
 import com.ahsgaming.starbattle.StarBattle;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,6 +19,9 @@ public class LevelScreen extends AbstractScreen {
     public static final String LOG = "LevelScreen";
 
     GameObject playerShip;
+    Group levelGroup;
+    Vector2 camera;
+
 
     /**
      * Constructor
@@ -35,17 +38,35 @@ public class LevelScreen extends AbstractScreen {
         playerShip = new GameObject("sloop.png");
         playerShip.init();
 
+        levelGroup = new Group();
+        camera = new Vector2();
 
+        stage.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+                // handle input
+            }
+
+            @Override
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+                super.touchUp(event, x, y, pointer, button);
+
+                // handle input
+            }
+        });
     }
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-
-        stage.addActor(playerShip);
+        levelGroup.clear();
+        levelGroup.addActor(playerShip);
         playerShip.setPosition((stage.getWidth() - playerShip.getWidth()) * 0.5f,
-                               (stage.getHeight() - playerShip.getHeight()) * 0.5f);
+                (stage.getHeight() - playerShip.getHeight()) * 0.5f);
 
+        stage.addActor(levelGroup);
 
     }
 
@@ -53,6 +74,7 @@ public class LevelScreen extends AbstractScreen {
     public void render(float delta) {
         super.render(delta);
 
-        playerShip.rotate(1);
+        camera.set(playerShip.getX() - (stage.getWidth() - playerShip.getWidth()) * 0.5f, playerShip.getY() - (stage.getHeight() - playerShip.getHeight()) * 0.5f);
+        levelGroup.setPosition(-1 * camera.x, -1 * camera.y);
     }
 }

@@ -20,7 +20,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class GameObject extends Actor {
     public static final String LOG = "GameObject";
 
-    Vector2 velocity, acceleration;
+    Vector2 velocity;
+    Vector2 acceleration;
+    Vector2 moveTarget;
 
     String image;
 
@@ -66,5 +68,13 @@ public class GameObject extends Actor {
 
     public void setAcceleration(Vector2 acceleration) {
         this.acceleration.set(acceleration.x, acceleration.y);
+    }
+
+    public Vector2 getMoveTarget() {
+        return moveTarget;
+    }
+
+    public void setMoveTarget(Vector2 moveTarget) {
+        this.moveTarget = moveTarget;
     }
 }
