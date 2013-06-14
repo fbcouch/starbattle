@@ -2,6 +2,7 @@ package com.ahsgaming.starbattle.screens;
 
 import com.ahsgaming.starbattle.GameObject;
 import com.ahsgaming.starbattle.StarBattle;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -37,6 +38,8 @@ public class LevelScreen extends AbstractScreen {
         super.show();
         playerShip = new GameObject("sloop.png");
         playerShip.init();
+        playerShip.setVelocity(new Vector2(20, 0));
+        game.addGameObject(playerShip);
 
         levelGroup = new Group();
         camera = new Vector2();
@@ -47,6 +50,7 @@ public class LevelScreen extends AbstractScreen {
                 super.clicked(event, x, y);
 
                 // handle input
+                playerShip.setMoveTarget(x - camera.x, y - camera.y);
             }
 
             @Override
@@ -54,6 +58,7 @@ public class LevelScreen extends AbstractScreen {
                 super.touchUp(event, x, y, pointer, button);
 
                 // handle input
+                playerShip.setMoveTarget(x - camera.x, y - camera.y);
             }
         });
     }
@@ -63,10 +68,10 @@ public class LevelScreen extends AbstractScreen {
         super.resize(width, height);
         levelGroup.clear();
         levelGroup.addActor(playerShip);
-        playerShip.setPosition((stage.getWidth() - playerShip.getWidth()) * 0.5f,
-                (stage.getHeight() - playerShip.getHeight()) * 0.5f);
 
         stage.addActor(levelGroup);
+
+        levelGroup.addActor(new Label("X", getSkin()));
 
     }
 
@@ -76,5 +81,6 @@ public class LevelScreen extends AbstractScreen {
 
         camera.set(playerShip.getX() - (stage.getWidth() - playerShip.getWidth()) * 0.5f, playerShip.getY() - (stage.getHeight() - playerShip.getHeight()) * 0.5f);
         levelGroup.setPosition(-1 * camera.x, -1 * camera.y);
+        Gdx.app.log(LOG, String.format("Position: [%f, %f]", playerShip.getX(), playerShip.getY()));
     }
 }

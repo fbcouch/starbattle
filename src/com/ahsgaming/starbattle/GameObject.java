@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -23,6 +24,8 @@ public class GameObject extends Actor {
     Vector2 velocity;
     Vector2 acceleration;
     Vector2 moveTarget;
+
+    float maxVelocity = 100;
 
     String image;
 
@@ -54,6 +57,22 @@ public class GameObject extends Actor {
 
     }
 
+    public void update(float delta) {
+        if (moveTarget != null) {
+            if (new Rectangle(getX(), getY(), getWidth(), getHeight()).contains(moveTarget.x, moveTarget.y))
+                clearMoveTarget();
+            else {
+                float angleToMove = new Vector2(moveTarget.x - getX(), moveTarget.y - getY()).angle();
+                if (Math.abs(angleToMove - getRotation()) < 5)
+                    setRotation(new Vector2(moveTarget.x - getX(), moveTarget.y - getY()).angle());
+                else if (angleToMove - getRotation() > 0)
+                    rotate(5);
+                else
+                    rotate(5);
+            }
+        }
+    }
+
     public Vector2 getVelocity() {
         return velocity;
     }
@@ -75,6 +94,29 @@ public class GameObject extends Actor {
     }
 
     public void setMoveTarget(Vector2 moveTarget) {
-        this.moveTarget = moveTarget;
+        this.moveTarget.set(moveTarget.x, moveTarget.y);
     }
+
+    public void setMoveTarget(float x, float y) {
+        if (moveTarget == null) moveTarget = new Vector2();
+        this.moveTarget.set(x, y);
+    }
+
+    public void clearMoveTarget() {
+        moveTarget = null;
+    }
+
+    public float getMaxVelocity() {
+        return maxVelocity;
+    }
+
+    public void setMaxVelocity(float maxVelocity) {
+        this.maxVelocity = maxVelocity;
+    }
+
+    public float getMaxVelocity2() {
+        return maxVelocity * maxVelocity;
+    }
+
+
 }
