@@ -22,6 +22,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 public class GameObject extends Group {
     public static final String LOG = "GameObject";
 
+    final StarBattle game;
+
     Vector2 velocity;
     Vector2 acceleration;
     Vector2 moveTarget;
@@ -34,13 +36,16 @@ public class GameObject extends Group {
     Image rootImage;
 
     public GameObject(String image) {
+        this.game = StarBattle.starBattle;
+
         velocity = new Vector2();
         acceleration = new Vector2();
         this.image = image;
+
     }
 
     public void init() {
-        region = new TextureRegion(new Texture(Gdx.files.local("assets/" + this.image)));
+        region = game.getTextureAtlas().createSprite(image);
         this.setBounds(0, 0, region.getRegionWidth(), region.getRegionHeight());
         rootImage = new Image(region);
         setOrigin(rootImage.getWidth() * 0.5f, rootImage.getHeight() * 0.5f);

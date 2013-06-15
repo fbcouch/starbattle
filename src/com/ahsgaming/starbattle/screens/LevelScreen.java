@@ -37,9 +37,9 @@ public class LevelScreen extends AbstractScreen {
     @Override
     public void show() {
         super.show();
-        playerShip = new Ship("sloop.png");
+        playerShip = new Ship("sloop");
         playerShip.init();
-        //playerShip.setVelocity(new Vector2(20, 0));
+        playerShip.setVelocity(new Vector2(20, 0));
         game.addGameObject(playerShip);
 
         levelGroup = new Group();

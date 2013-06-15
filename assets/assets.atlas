@@ -1,0 +1,18 @@
+assets.png
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+sloop
+  rotate: false
+  xy: 2, 25
+  size: 100, 45
+  orig: 100, 45
+  offset: 0, 0
+  index: -1
+laser
+  rotate: false
+  xy: 2, 2
+  size: 30, 21
+  orig: 30, 21
+  offset: 0, 0
+  index: -1

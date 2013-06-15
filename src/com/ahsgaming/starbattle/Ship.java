@@ -29,12 +29,12 @@ public class Ship extends GameObject {
     public void init() {
         super.init();
 
-        Emplacement e = new Emplacement("laser.png");
+        Emplacement e = new Emplacement("laser");
         e.init();
         e.setPosition(getWidth() * 0.75f - e.getWidth() * 0.5f, (getHeight() - e.getHeight()) * 0.5f);
         addEmplacement(e);
 
-        e = new Emplacement("laser.png");
+        e = new Emplacement("laser");
         e.init();
         e.setPosition(getWidth() * 0.3f - e.getWidth() * 0.5f, (getHeight() - e.getHeight()) * 0.5f);
         addEmplacement(e);
