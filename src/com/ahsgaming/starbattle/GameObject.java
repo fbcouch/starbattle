@@ -62,13 +62,21 @@ public class GameObject extends Actor {
             if (new Rectangle(getX(), getY(), getWidth(), getHeight()).contains(moveTarget.x, moveTarget.y))
                 clearMoveTarget();
             else {
-                float angleToMove = new Vector2(moveTarget.x - getX(), moveTarget.y - getY()).angle();
-                if (Math.abs(angleToMove - getRotation()) < 5)
-                    setRotation(new Vector2(moveTarget.x - getX(), moveTarget.y - getY()).angle());
-                else if (angleToMove - getRotation() > 0)
-                    rotate(5);
+                // get the direction vector for where to move
+                Vector2 moveVector = new Vector2(moveTarget).sub(getX() + getWidth() * 0.5f, getY() + getHeight() * 0.5f);
+                float angleToMove = moveVector.angle() - getRotation();
+
+                // clamp this between [-180, 180] so we know which way to move
+                while (angleToMove > 180) angleToMove -= 360;
+                while (angleToMove < -180) angleToMove += 360;
+
+                // rotate! TODO: create a property for rotation speed to use here
+                if (Math.abs(angleToMove) <= 5)
+                    setRotation(moveVector.angle());
+                else if (angleToMove > 0)
+                    setRotation((getRotation() + 5) % 360);
                 else
-                    rotate(5);
+                    setRotation((getRotation() - 5) % 360);
             }
         }
     }
