@@ -1,6 +1,7 @@
 package com.ahsgaming.starbattle.screens;
 
 import com.ahsgaming.starbattle.GameObject;
+import com.ahsgaming.starbattle.Ship;
 import com.ahsgaming.starbattle.StarBattle;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -19,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class LevelScreen extends AbstractScreen {
     public static final String LOG = "LevelScreen";
 
-    GameObject playerShip;
+    Ship playerShip;
     Group levelGroup;
     Vector2 camera;
 
@@ -36,7 +37,7 @@ public class LevelScreen extends AbstractScreen {
     @Override
     public void show() {
         super.show();
-        playerShip = new GameObject("sloop.png");
+        playerShip = new Ship("sloop.png");
         playerShip.init();
         //playerShip.setVelocity(new Vector2(20, 0));
         game.addGameObject(playerShip);

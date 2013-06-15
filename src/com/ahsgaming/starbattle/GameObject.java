@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
 /**
@@ -18,7 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
  * Time: 3:07 PM
  * To change this template use File | Settings | File Templates.
  */
-public class GameObject extends Actor {
+public class GameObject extends Group {
     public static final String LOG = "GameObject";
 
     Vector2 velocity;
@@ -30,6 +31,7 @@ public class GameObject extends Actor {
     String image;
 
     TextureRegion region;
+    Image rootImage;
 
     public GameObject(String image) {
         velocity = new Vector2();
@@ -40,21 +42,9 @@ public class GameObject extends Actor {
     public void init() {
         region = new TextureRegion(new Texture(Gdx.files.local("assets/" + this.image)));
         this.setBounds(0, 0, region.getRegionWidth(), region.getRegionHeight());
-    }
-
-    /* (non-Javadoc)
-	 * @see com.badlogic.gdx.scenes.scene2d.Actor#draw(com.badlogic.gdx.graphics.g2d.SpriteBatch, float)
-	 */
-    @Override
-    public void draw(SpriteBatch batch, float parentAlpha) {
-
-        Color color = getColor();
-        batch.setColor(color.r, color.g, color.b, color.a * parentAlpha);
-
-        if (region != null)
-            batch.draw(region, getX(), getY(), getWidth() * 0.5f, getHeight() * 0.5f, getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-
-
+        rootImage = new Image(region);
+        setOrigin(rootImage.getWidth() * 0.5f, rootImage.getHeight() * 0.5f);
+        addActor(rootImage);
     }
 
     public void update(float delta) {
