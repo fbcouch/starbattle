@@ -16,18 +16,37 @@ import java.util.Random;
 public class Ship extends GameObject {
     public static final String LOG = "Ship";
 
+    float maxHull, curHull, regenHull;
+    float maxShield, curShield, regenShield;
+    float armor;
+
+    ProgressBar healthBar, shieldBar;
+
     Array<Emplacement> emplacements;
 
     public Ship(String image) {
         super(image);
 
         emplacements = new Array<Emplacement>();
+
+        maxHull = 100;
+        curHull = maxHull;
+
+        maxShield = 100;
+        curShield = maxShield;
+
+        armor = 0;
     }
 
 
     @Override
     public void init() {
         super.init();
+
+        healthBar = new ProgressBar();
+        healthBar.setSize(100, 20);
+        shieldBar = new ProgressBar();
+        shieldBar.setSize(100, 20);
 
         Emplacement e = new Emplacement("laser");
         e.init();
@@ -49,6 +68,18 @@ public class Ship extends GameObject {
         }
     }
 
+    @Override
+    public void draw(SpriteBatch batch, float parentAlpha) {
+        super.draw(batch, parentAlpha);
+
+        float hullPct = curHull / maxHull;
+        healthBar.setCurrent(hullPct);
+        float shieldPct = curShield / maxShield;
+        shieldBar.setCurrent(shieldPct);
+
+        healthBar.draw(batch, (getWidth() - healthBar.getWidth()) * 0.5f, 0, parentAlpha);
+    }
+
     public void addEmplacement(Emplacement emp) {
         emplacements.add(emp);
         addActor(emp);
@@ -60,4 +91,59 @@ public class Ship extends GameObject {
         }
     }
 
+    public float getMaxHull() {
+        return maxHull;
+    }
+
+    public void setMaxHull(float maxHull) {
+        this.maxHull = maxHull;
+    }
+
+    public float getCurHull() {
+        return curHull;
+    }
+
+    public void setCurHull(float curHull) {
+        this.curHull = curHull;
+    }
+
+    public float getRegenHull() {
+        return regenHull;
+    }
+
+    public void setRegenHull(float regenHull) {
+        this.regenHull = regenHull;
+    }
+
+    public float getMaxShield() {
+        return maxShield;
+    }
+
+    public void setMaxShield(float maxShield) {
+        this.maxShield = maxShield;
+    }
+
+    public float getCurShield() {
+        return curShield;
+    }
+
+    public void setCurShield(float curShield) {
+        this.curShield = curShield;
+    }
+
+    public float getRegenShield() {
+        return regenShield;
+    }
+
+    public void setRegenShield(float regenShield) {
+        this.regenShield = regenShield;
+    }
+
+    public float getArmor() {
+        return armor;
+    }
+
+    public void setArmor(float armor) {
+        this.armor = armor;
+    }
 }
