@@ -27,7 +27,7 @@
                     x: 30,
                     y: 10,
                     fits: ["small"],
-                    default: "laser",
+                    emplacement: "laser",
                 },
             ],
         },
@@ -38,6 +38,7 @@
             id: "laser",
             name: "Laser Cannon",
             desc: "Basic laser cannon",
+            type: "small",
             image: "laser",
             turn-speed: 25,
             ammo: 0,
@@ -51,6 +52,7 @@
     [
         {
             id: "green-laser",
+            image: "green-laser",
             init-speed: 300,
             max-speed: 300,
             accel: 0,
