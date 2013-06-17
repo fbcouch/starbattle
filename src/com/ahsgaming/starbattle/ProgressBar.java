@@ -39,7 +39,7 @@ public class ProgressBar {
         if (current >= 0.5f) color = highColor;
         else if (current >= 0.25f) color = medColor;
 
-        batch.setColor(batch.getColor().mul(color));
+        batch.setColor(color);
         batch.getColor().a *= parentAlpha;
         batch.draw(img, x, y, getWidth() * current, getHeight());
     }

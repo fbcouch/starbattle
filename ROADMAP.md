@@ -6,7 +6,7 @@
     [x] Initial project setup
     [ ] Basic level screen
         [x] Display player ship
-        [ ] Display ship status (health, shields, ammo?)
+        [x] Display ship status (health, shields)
     [x] Basic ship setup
         [x] One ship
         [x] One weapon type, two weapons on ship

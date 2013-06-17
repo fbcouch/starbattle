@@ -1,5 +1,6 @@
 package com.ahsgaming.starbattle;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -44,9 +45,12 @@ public class Ship extends GameObject {
         super.init();
 
         healthBar = new ProgressBar();
-        healthBar.setSize(100, 20);
+        healthBar.setSize(100, 2);
         shieldBar = new ProgressBar();
-        shieldBar.setSize(100, 20);
+        shieldBar.setSize(100, 2);
+        shieldBar.setHighColor(new Color(0, 0.5f, 1, 1));
+        shieldBar.setMedColor(shieldBar.getHighColor());
+        shieldBar.setLowColor(shieldBar.getHighColor());
 
         Emplacement e = new Emplacement("laser");
         e.init();
@@ -77,7 +81,8 @@ public class Ship extends GameObject {
         float shieldPct = curShield / maxShield;
         shieldBar.setCurrent(shieldPct);
 
-        healthBar.draw(batch, (getWidth() - healthBar.getWidth()) * 0.5f, 0, parentAlpha);
+        healthBar.draw(batch, getX() + (getWidth() - healthBar.getWidth()) * 0.5f, getY(), parentAlpha);
+        shieldBar.draw(batch, getX() + (getWidth() - shieldBar.getWidth()) * 0.5f, getY() + 3, parentAlpha);
     }
 
     public void addEmplacement(Emplacement emp) {
