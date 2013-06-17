@@ -5,6 +5,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
 
 /**
@@ -22,6 +23,7 @@ public class StarBattle extends Game {
     TextureAtlas textureAtlas;
 
     Array<GameObject> gameObjects;
+    Group groupObjects;
 
     @Override
     public void create() {
@@ -29,6 +31,7 @@ public class StarBattle extends Game {
         gameObjects = new Array<GameObject>();
         textureAtlas = new TextureAtlas(Gdx.files.local("assets/assets.atlas"));
 
+        groupObjects = new Group();
         setScreen(new LevelScreen(this));
     }
 
@@ -52,9 +55,14 @@ public class StarBattle extends Game {
 
     public void addGameObject(GameObject g) {
         gameObjects.add(g);
+        groupObjects.addActor(g);
     }
 
     public TextureAtlas getTextureAtlas() {
         return textureAtlas;
+    }
+
+    public Group getGroupObjects() {
+        return groupObjects;
     }
 }

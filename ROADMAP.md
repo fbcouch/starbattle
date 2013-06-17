@@ -12,7 +12,7 @@
         [x] One weapon type, two weapons on ship
     [ ] Basic controls
         [ ] Move
-        [ ] Fire
+        [x] Fire
     
 #### 2013-06-21
 

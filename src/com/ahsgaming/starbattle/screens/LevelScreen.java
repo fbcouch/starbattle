@@ -42,7 +42,7 @@ public class LevelScreen extends AbstractScreen {
         playerShip.setVelocity(new Vector2(20, 0));
         game.addGameObject(playerShip);
 
-        levelGroup = new Group();
+        levelGroup = game.getGroupObjects();
         camera = new Vector2();
 
         stage.addListener(new ClickListener() {
@@ -68,8 +68,6 @@ public class LevelScreen extends AbstractScreen {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-        levelGroup.clear();
-        levelGroup.addActor(playerShip);
 
         stage.addActor(levelGroup);
 

@@ -68,7 +68,8 @@ public class Ship extends GameObject {
         super.update(delta);
 
         for (Emplacement emp: emplacements) {
-            emp.rotate(5 * (Math.random() >= 0.5 ? -1 : 1));
+            //emp.rotate(5 * (Math.random() >= 0.5 ? -1 : 1));
+            emp.update(delta);
         }
     }
 
