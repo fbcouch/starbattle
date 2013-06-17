@@ -1,4 +1,4 @@
-package com.ahsgaming.starbattle;
+package com.ahsgaming.starbattle.json;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
@@ -49,15 +49,36 @@ public class ShipLoader {
         }
     }
 
+    public JsonShip getJsonShip(String id) {
+        for (JsonShip js: jsonShips) {
+            if (js.id.equals(id)) return js;
+        }
+        return null;
+    }
+
+    public JsonEmplacement getJsonEmplacement(String id) {
+        for (JsonEmplacement je: jsonEmplacements) {
+            if (je.id.equals(id)) return je;
+        }
+        return null;
+    }
+
+    public JsonProjectile getJsonProjectile(String id) {
+        for (JsonProjectile jp: jsonProjectiles) {
+            if (jp.id.equals(id)) return jp;
+        }
+        return null;
+    }
+
     public static class JsonShip {
-        String id = "";
-        String name = "", desc = "";
-        String image = "";
-        float speed, turnSpeed, accel, hull, hullRegen, shield, shieldRegen, armor;
-        Array<Object> emplacements;
+        public String id = "";
+        public String name = "", desc = "";
+        public String image = "";
+        public float speed, turnSpeed, accel, hull, hullRegen, shield, shieldRegen, armor;
+        public Array<JsonShipEmplacement> emplacements;
 
         public JsonShip() {
-            emplacements = new Array<Object>();
+            emplacements = new Array<JsonShipEmplacement>();
         }
 
         public JsonShip(ObjectMap<String, Object> json) {
@@ -76,15 +97,20 @@ public class ShipLoader {
             shieldRegen = ShipLoader.getFloatProperty(json, "shield-regen");
             armor = ShipLoader.getFloatProperty(json, "armor");
 
-            if (json.containsKey("emplacements"))
-                emplacements.addAll((Array<Object>)json.get("emplacements"));
+            if (json.containsKey("emplacements")) {
+                Array<Object> emps = (Array<Object>)json.get("emplacements");
+                emplacements.clear();
+                for (Object emp: emps) {
+                    emplacements.add(new JsonShipEmplacement((ObjectMap<String, Object>) emp));
+                }
+            }
         }
     }
 
     public static class JsonEmplacement {
-        String id = "", name = "", desc = "", image = "", type = "";
-        float turnSpeed, ammo, maxAmmo, ammoRegen, fireRate;
-        String projectile = "";
+        public String id = "", name = "", desc = "", image = "", type = "";
+        public float turnSpeed, ammo, maxAmmo, ammoRegen, fireRate;
+        public String projectile = "";
 
         public JsonEmplacement(ObjectMap<String, Object> json) {
             id = ShipLoader.getStringProperty(json, "id");
@@ -101,9 +127,27 @@ public class ShipLoader {
         }
     }
 
+    public static class JsonShipEmplacement {
+        public String emplacement = "";
+        public float x, y;
+        public Array<String> fits;
+
+        public JsonShipEmplacement(ObjectMap<String, Object> json) {
+            emplacement = ShipLoader.getStringProperty(json, "emplacement");
+            x = ShipLoader.getFloatProperty(json, "x");
+            y = ShipLoader.getFloatProperty(json, "y");
+            fits = new Array<String>();
+            if (json.containsKey("fits")) {
+                Array<Object> f = (Array<Object>)json.get("fits");
+                for (Object fo: f)
+                    fits.add(fo.toString());
+            }
+        }
+    }
+
     public static class JsonProjectile {
-        String id = "", image = "";
-        float initSpeed, maxSpeed, accel, lifetime, damage;
+        public String id = "", image = "";
+        public float initSpeed, maxSpeed, accel, lifetime, damage;
 
         public JsonProjectile(ObjectMap<String, Object> json) {
             id = ShipLoader.getStringProperty(json, "id");

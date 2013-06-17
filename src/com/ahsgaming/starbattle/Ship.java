@@ -1,5 +1,6 @@
 package com.ahsgaming.starbattle;
 
+import com.ahsgaming.starbattle.json.ShipLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -25,6 +26,8 @@ public class Ship extends GameObject {
 
     Array<Emplacement> emplacements;
 
+    ShipLoader.JsonShip proto;
+
     public Ship(String image) {
         super(image);
 
@@ -37,6 +40,23 @@ public class Ship extends GameObject {
         curShield = maxShield;
 
         armor = 0;
+    }
+
+    public Ship(ShipLoader.JsonShip proto) {
+        this(proto.image);
+        this.proto = proto;
+
+        maxSpeed = proto.speed;
+        turnSpeed = proto.turnSpeed;
+        maxAccel = proto.accel;
+
+        maxHull = proto.hull;
+        curHull = proto.hull;
+        regenHull = proto.hullRegen;
+        maxShield = proto.shield;
+        curShield = proto.shield;
+        regenShield = proto.shieldRegen;
+        armor = proto.armor;
     }
 
 
@@ -52,15 +72,14 @@ public class Ship extends GameObject {
         shieldBar.setMedColor(shieldBar.getHighColor());
         shieldBar.setLowColor(shieldBar.getHighColor());
 
-        Emplacement e = new Emplacement("laser");
-        e.init();
-        e.setPosition(getWidth() * 0.75f - e.getWidth() * 0.5f, (getHeight() - e.getHeight()) * 0.5f);
-        addEmplacement(e);
+        emplacements.clear();
 
-        e = new Emplacement("laser");
-        e.init();
-        e.setPosition(getWidth() * 0.3f - e.getWidth() * 0.5f, (getHeight() - e.getHeight()) * 0.5f);
-        addEmplacement(e);
+        for (ShipLoader.JsonShipEmplacement jse: proto.emplacements) {
+            Emplacement e = new Emplacement(game.getShipLoader().getJsonEmplacement(jse.emplacement));
+            e.init();
+            e.setPosition(jse.x - e.getWidth() * 0.5f, jse.y - e.getHeight() * 0.5f);
+            addEmplacement(e);
+        }
     }
 
     @Override

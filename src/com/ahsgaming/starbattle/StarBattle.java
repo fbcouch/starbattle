@@ -1,5 +1,6 @@
 package com.ahsgaming.starbattle;
 
+import com.ahsgaming.starbattle.json.ShipLoader;
 import com.ahsgaming.starbattle.screens.LevelScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -47,7 +48,7 @@ public class StarBattle extends Game {
             // update velocity
             g.getVelocity().add(new Vector2(g.getAcceleration().mul(delta)));
             if (g.getVelocity().len2() > g.getMaxVelocity2())
-                g.getVelocity().div(g.getVelocity().len()).mul(g.getMaxVelocity());
+                g.getVelocity().div(g.getVelocity().len()).mul(g.getMaxSpeed());
 
             g.setPosition(g.getX() + g.getVelocity().x * delta, g.getY() + g.getVelocity().y * delta);
 
@@ -66,5 +67,9 @@ public class StarBattle extends Game {
 
     public Group getGroupObjects() {
         return groupObjects;
+    }
+
+    public ShipLoader getShipLoader() {
+        return shipLoader;
     }
 }

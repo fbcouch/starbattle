@@ -1,14 +1,8 @@
 package com.ahsgaming.starbattle;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 
@@ -28,7 +22,7 @@ public class GameObject extends Group {
     Vector2 acceleration;
     Vector2 moveTarget;
 
-    float maxVelocity = 100;
+    float maxSpeed, maxAccel, turnSpeed;
 
     String image;
 
@@ -119,16 +113,16 @@ public class GameObject extends Group {
         moveTarget = null;
     }
 
-    public float getMaxVelocity() {
-        return maxVelocity;
+    public float getMaxSpeed() {
+        return maxSpeed;
     }
 
-    public void setMaxVelocity(float maxVelocity) {
-        this.maxVelocity = maxVelocity;
+    public void setMaxSpeed(float maxSpeed) {
+        this.maxSpeed = maxSpeed;
     }
 
     public float getMaxVelocity2() {
-        return maxVelocity * maxVelocity;
+        return maxSpeed * maxSpeed;
     }
 
     public Vector2 convertToParentCoords(Vector2 coords) {

@@ -1,5 +1,7 @@
 package com.ahsgaming.starbattle;
 
+import com.ahsgaming.starbattle.json.ShipLoader;
+
 /**
  * Created with IntelliJ IDEA.
  * User: jami
@@ -10,10 +12,19 @@ package com.ahsgaming.starbattle;
 public class Projectile extends GameObject {
     public static final String LOG = "Projectile";
 
+    ShipLoader.JsonProjectile proto;
+
     float damage;
     GameObject owner;
 
     public Projectile(String image) {
         super(image);
+    }
+
+    public Projectile(ShipLoader.JsonProjectile proto) {
+        this(proto.image);
+        this.proto = proto;
+
+
     }
 }

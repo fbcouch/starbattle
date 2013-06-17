@@ -19,13 +19,13 @@
             [
                 {
                     x: 75,
-                    y: 10,
+                    y: 22,
                     fits: ["small"],
-                    default: "laser",
+                    emplacement: "laser",
                 },
                 {
                     x: 30,
-                    y: 10,
+                    y: 22,
                     fits: ["small"],
                     emplacement: "laser",
                 },

@@ -1,6 +1,6 @@
 package com.ahsgaming.starbattle;
 
-import com.badlogic.gdx.Gdx;
+import com.ahsgaming.starbattle.json.ShipLoader;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -13,10 +13,13 @@ import com.badlogic.gdx.math.Vector2;
 public class Emplacement extends GameObject {
     public static final String LOG = "Emplacement";
 
+    String type = "";
     float fireRate, secSinceLastFire;
     float curAmmo, maxAmmo, regenAmmo;
     float projInitSpeed, projMaxSpeed, projAccel, projLifetime, projDamage;     // probably will want all these defined
                                                                                 // in "projectile type"
+    ShipLoader.JsonEmplacement proto;
+    ShipLoader.JsonProjectile projectile;
 
     public Emplacement(String image) {
         super(image);
@@ -29,6 +32,19 @@ public class Emplacement extends GameObject {
         projInitSpeed = 300;
         projMaxSpeed = 300;
 
+    }
+
+    public Emplacement(ShipLoader.JsonEmplacement proto) {
+        this(proto.image);
+        this.proto = proto;
+
+        type = proto.type;
+        turnSpeed = proto.turnSpeed;
+        maxAmmo = proto.maxAmmo;
+        curAmmo = proto.ammo;
+        regenAmmo = proto.ammoRegen;
+        fireRate = proto.fireRate;
+        projectile = game.getShipLoader().getJsonProjectile(proto.projectile);
     }
 
     @Override
@@ -60,7 +76,7 @@ public class Emplacement extends GameObject {
         bullet.init();
         bullet.setRotation(getRotation() + getParent().getRotation());
         bullet.setVelocity(new Vector2(projInitSpeed, 0).rotate(getRotation() + getParent().getRotation()));
-        bullet.setMaxVelocity(projMaxSpeed);
+        bullet.setMaxSpeed(projMaxSpeed);
 
         // TODO fix this - doesn't work exactly right
 

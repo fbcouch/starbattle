@@ -42,7 +42,7 @@ public class LevelScreen extends AbstractScreen {
     public void show() {
         super.show();
         bgGroup = new Group();
-        playerShip = new Ship("sloop");
+        playerShip = new Ship(game.getShipLoader().getJsonShip("sloop"));
         playerShip.init();
         playerShip.setVelocity(new Vector2(20, 0));
         game.addGameObject(playerShip);
