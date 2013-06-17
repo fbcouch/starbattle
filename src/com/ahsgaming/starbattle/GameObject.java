@@ -72,6 +72,16 @@ public class GameObject extends Group {
                     setRotation((getRotation() + 5) % 360);
                 else
                     setRotation((getRotation() - 5) % 360);
+
+
+                // TODO improve pathing
+                if (getRotation() == moveVector.angle()) {
+                    setAcceleration(new Vector2(10, 0).rotate(getRotation()));
+                } else {
+                    if (velocity.len2() > 0) {
+                        setAcceleration(new Vector2(-10, 0).rotate(velocity.angle()));
+                    }
+                }
             }
         }
     }
@@ -121,5 +131,8 @@ public class GameObject extends Group {
         return maxVelocity * maxVelocity;
     }
 
-
+    public Vector2 convertToParentCoords(Vector2 coords) {
+        // convert to origin-normalized vector, rotate, convert to parental coords
+        return new Vector2(coords).sub(getOriginX(), getOriginY()).rotate(getRotation()).add(getOriginX(), getOriginY()).add(getX(), getY());
+    }
 }

@@ -4,19 +4,39 @@
 
 #### 2013-06-14
     [x] Initial project setup
-    [ ] Basic level screen
+    [x] Basic level screen
         [x] Display player ship
         [x] Display ship status (health, shields)
     [x] Basic ship setup
         [x] One ship
         [x] One weapon type, two weapons on ship
-    [ ] Basic controls
-        [ ] Move
-        [x] Fire
+    [x] Basic controls
+        [x] Move
+        [x] Fire (automatic)
     
 #### 2013-06-21
+    [ ] Shiplist
+        [ ] create JSON model
+        [ ] write loader
+    [ ] Profile
+        [ ] create JSON model
+        [ ] save/load
+    [ ] Basic gameplay
+        [ ] Player and randomly spawned enemy ship
+        [ ] Random enemy AI
+        [ ] Emplacements auto-target nearest enemy
+        [ ] Ship destroyed on 0 health
 
 #### 2013-06-28
+    [ ] Advanced gameplay
+    [ ] Ship shop
 
 #### 2013-07-04
     [ ] Release
+        [ ] PC
+        [ ] Android
+        [ ] Web?
+
+### CHAPTER 2 (July): ???
+    - Online multiplayer (co-op or vs?)
+    - Campaign?

@@ -34,8 +34,6 @@ public class Emplacement extends GameObject {
     @Override
     public void init() {
         super.init();
-
-        setOrigin(10, 10);
     }
 
     @Override
@@ -65,19 +63,10 @@ public class Emplacement extends GameObject {
         bullet.setMaxVelocity(projMaxSpeed);
 
         // TODO fix this - doesn't work exactly right
-        // get the vector from the origin to the firing point
-        Vector2 bulletOrigin = new Vector2(getWidth() - getOriginX(),
-                                          (getHeight() - bullet.getHeight()) * 0.5f - getOriginY());
-        // rotate this by the rotation
-        bulletOrigin.rotate(getRotation());
-        // add the distance from the (0,0) of the image to the rotation origin and the position within the parental ref.
-        bulletOrigin.add(getX() + getOriginX(), getY() + getOriginY());
-        // transform this vector to the parental rotation origin
-        bulletOrigin.sub(getParent().getOriginX(), getParent().getOriginY());
-        // rotate by the parent's rotation
-        bulletOrigin.rotate(getParent().getRotation());
-        // transform back to the parent's (0, 0) and then to the container frame of reference
-        bulletOrigin.add(getParent().getOriginX(), getParent().getOriginY()).add(getParent().getX(), getParent().getY());
+
+        Vector2 bulletOrigin = ((GameObject)getParent()).convertToParentCoords(
+                convertToParentCoords(new Vector2(getWidth(), (getHeight() - bullet.getHeight()) * 0.5f))
+        );
 
         bullet.setPosition(bulletOrigin.x, bulletOrigin.y);
         game.addGameObject(bullet);
