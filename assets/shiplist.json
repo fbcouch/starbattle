@@ -1,0 +1,61 @@
+{
+    "version": 0,
+    "ships":
+    [
+        {
+            id: "sloop",
+            name: "Sloop",
+            desc: "Small, maneuverable ship. Useful for patrol and recon roles.",
+            image: "sloop",
+            speed: 25,
+            turn-speed: 25,
+            accel: 5,
+            hull: 100,
+            hull-regen: 0,
+            shield: 100,
+            shield-regen: 1,
+            armor: 0,
+            emplacements:
+            [
+                {
+                    x: 75,
+                    y: 10,
+                    fits: ["small"],
+                    default: "laser",
+                },
+                {
+                    x: 30,
+                    y: 10,
+                    fits: ["small"],
+                    default: "laser",
+                },
+            ],
+        },
+    ],
+    "emplacements":
+    [
+        {
+            id: "laser",
+            name: "Laser Cannon",
+            desc: "Basic laser cannon",
+            image: "laser",
+            turn-speed: 25,
+            ammo: 0,
+            max-ammo: 10,
+            ammo-regen: 1,
+            fire-rate: 1,
+            projectile: "green-laser",
+        },
+    ],
+    "projectiles":
+    [
+        {
+            id: "green-laser",
+            init-speed: 300,
+            max-speed: 300,
+            accel: 0,
+            lifetime: 3,
+            damage: 10,
+        },
+    ],
+}

@@ -21,6 +21,7 @@ public class StarBattle extends Game {
     public static StarBattle starBattle;
 
     TextureAtlas textureAtlas;
+    ShipLoader shipLoader;
 
     Array<GameObject> gameObjects;
     Group groupObjects;
@@ -30,6 +31,7 @@ public class StarBattle extends Game {
         starBattle = this;
         gameObjects = new Array<GameObject>();
         textureAtlas = new TextureAtlas(Gdx.files.local("assets/assets.atlas"));
+        shipLoader = new ShipLoader("shiplist.json");
 
         groupObjects = new Group();
         setScreen(new LevelScreen(this));

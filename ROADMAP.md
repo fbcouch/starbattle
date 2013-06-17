@@ -16,7 +16,7 @@
     
 #### 2013-06-21
     [ ] Shiplist
-        [ ] create JSON model
+        [x] create JSON model
         [ ] write loader
     [ ] Profile
         [ ] create JSON model
