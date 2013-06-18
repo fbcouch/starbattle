@@ -52,11 +52,11 @@
     [
         {
             id: "green-laser",
-            image: "green-laser",
+            image: "laser-green",
             init-speed: 300,
             max-speed: 300,
             accel: 0,
-            lifetime: 3,
+            lifetime: 2,
             damage: 10,
         },
     ],

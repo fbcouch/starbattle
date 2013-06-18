@@ -53,12 +53,20 @@ public class StarBattle extends Game {
             g.setPosition(g.getX() + g.getVelocity().x * delta, g.getY() + g.getVelocity().y * delta);
 
             g.update(delta);
+
+            if (g.isRemove())
+                removeGameObject(g);
         }
     }
 
     public void addGameObject(GameObject g) {
         gameObjects.add(g);
         groupObjects.addActor(g);
+    }
+
+    public void removeGameObject(GameObject g) {
+        gameObjects.removeValue(g, true);
+        g.remove();
     }
 
     public TextureAtlas getTextureAtlas() {

@@ -72,11 +72,11 @@ public class Emplacement extends GameObject {
     }
 
     public void fire() {
-        GameObject bullet = new GameObject("laser-green");
-        bullet.init();
+        GameObject bullet = new Projectile(projectile);
+
         bullet.setRotation(getRotation() + getParent().getRotation());
-        bullet.setVelocity(new Vector2(projInitSpeed, 0).rotate(getRotation() + getParent().getRotation()));
-        bullet.setMaxSpeed(projMaxSpeed);
+
+        bullet.init();
 
         // TODO fix this - doesn't work exactly right
 

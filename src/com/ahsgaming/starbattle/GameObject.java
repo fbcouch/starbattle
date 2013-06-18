@@ -29,6 +29,8 @@ public class GameObject extends Group {
     TextureRegion region;
     Image rootImage;
 
+    boolean remove = false;
+
     public GameObject(String image) {
         this.game = StarBattle.starBattle;
 
@@ -128,5 +130,13 @@ public class GameObject extends Group {
     public Vector2 convertToParentCoords(Vector2 coords) {
         // convert to origin-normalized vector, rotate, convert to parental coords
         return new Vector2(coords).sub(getOriginX(), getOriginY()).rotate(getRotation()).add(getOriginX(), getOriginY()).add(getX(), getY());
+    }
+
+    public boolean isRemove() {
+        return remove;
+    }
+
+    public void setRemove(boolean remove) {
+        this.remove = remove;
     }
 }
