@@ -87,7 +87,11 @@ public class GameObject extends Group {
             setRotation((getRotation() + turnSpeed * delta) % 360);
         else
             setRotation((getRotation() - turnSpeed * delta) % 360);
-        return moveVector;
+
+        while (getRotation() < 0) rotate(360);
+        while (getRotation() > 360) rotate(-360);
+
+        return moveVector.rotate(-1 * rotationOffset);
     }
 
     public boolean canCollide(GameObject other) {

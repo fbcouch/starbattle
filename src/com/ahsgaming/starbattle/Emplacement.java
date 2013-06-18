@@ -1,6 +1,7 @@
 package com.ahsgaming.starbattle;
 
 import com.ahsgaming.starbattle.json.ShipLoader;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -65,6 +66,7 @@ public class Emplacement extends GameObject {
             Vector2 theseCoords = ((Ship)getParent()).convertToParentCoords(convertToParentCoords(new Vector2(getX() + getOriginX(), getY() + getOriginY())));
             targetCoords.sub(theseCoords);
             float angle = rotateToward(delta, targetCoords, getParent().getRotation()).angle();
+            Gdx.app.log(LOG, String.format("angle: %f, rotation: %f", angle, getRotation()));
             if (angle - 5 < getRotation() && angle + 5 > getRotation()) {
                 if (canFire()) {
                     fire();

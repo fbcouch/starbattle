@@ -24,7 +24,7 @@
         [ ] save/load
     [ ] Basic gameplay
         [ ] Player and randomly spawned enemy ship
-        [ ] Random enemy AI
+        [x] Random enemy AI
         [x] Emplacements auto-target nearest enemy
         [x] Ship destroyed on 0 health
 

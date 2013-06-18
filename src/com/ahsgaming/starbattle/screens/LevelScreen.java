@@ -1,10 +1,12 @@
 package com.ahsgaming.starbattle.screens;
 
+import com.ahsgaming.starbattle.AIShip;
 import com.ahsgaming.starbattle.GameObject;
 import com.ahsgaming.starbattle.Ship;
 import com.ahsgaming.starbattle.StarBattle;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -45,10 +47,9 @@ public class LevelScreen extends AbstractScreen {
         bgGroup = new Group();
         playerShip = new Ship(game.getShipLoader().getJsonShip("sloop"));
         playerShip.init();
-        playerShip.setVelocity(new Vector2(20, 0));
         game.getGameController().addGameObject(playerShip);
 
-        Ship enemyShip = new Ship(game.getShipLoader().getJsonShip("sloop"));
+        AIShip enemyShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
         enemyShip.init();
         enemyShip.setPosition(200, 200);
         game.getGameController().addGameObject(enemyShip);
@@ -102,5 +103,24 @@ public class LevelScreen extends AbstractScreen {
         camera.set(playerShip.getX() - (stage.getWidth() - playerShip.getWidth()) * 0.5f, playerShip.getY() - (stage.getHeight() - playerShip.getHeight()) * 0.5f);
         levelGroup.setPosition(-1 * camera.x, -1 * camera.y);
         bgGroup.setPosition(levelGroup.getX(), levelGroup.getY());
+
+        if (game.DEBUG) {
+            ShapeRenderer shapeRenderer = new ShapeRenderer();
+
+            shapeRenderer.setColor(0, 0, 1, 1);
+            for (GameObject obj: game.getGameController().getGameObjects()) {
+                if (obj instanceof Ship && obj.getMoveTarget() != null) {
+                    shapeRenderer.begin(ShapeRenderer.ShapeType.Circle);
+                    shapeRenderer.circle(obj.getMoveTarget().x - camera.x, obj.getMoveTarget().y - camera.y, 5);
+                    shapeRenderer.end();
+
+                    shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
+                    shapeRenderer.line(obj.getX() + obj.getOriginX() - camera.x, obj.getY() + obj.getOriginY() - camera.y,
+                            obj.getMoveTarget().x - camera.x, obj.getMoveTarget().y - camera.y);
+                    shapeRenderer.end();
+                }
+            }
+
+        }
     }
 }

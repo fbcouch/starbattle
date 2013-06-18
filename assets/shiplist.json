@@ -40,7 +40,7 @@
             desc: "Basic laser cannon",
             type: "small",
             image: "laser",
-            turn-speed: 25,
+            turn-speed: 50,
             ammo: 0,
             max-ammo: 10,
             ammo-regen: 1,
