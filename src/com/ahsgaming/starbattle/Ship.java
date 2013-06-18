@@ -28,6 +28,8 @@ public class Ship extends GameObject {
 
     ShipLoader.JsonShip proto;
 
+    Ship target;
+
     public Ship(String image) {
         super(image);
 
@@ -86,9 +88,25 @@ public class Ship extends GameObject {
     public void update(float delta) {
         super.update(delta);
 
+        float rangesq = 0;
         for (Emplacement emp: emplacements) {
-            //emp.rotate(5 * (Math.random() >= 0.5 ? -1 : 1));
+            float er = emp.getRangeSq();
+            if (er > rangesq) rangesq = er;
+        }
+
+        Array<Ship> possibleTargets = new Array<Ship>();
+        for (GameObject obj: game.getGameController().getGameObjects()) {
+            if (obj instanceof Ship && obj != this && GameObject.getDistanceSq(this, obj) <= rangesq) {
+                possibleTargets.add((Ship)obj);
+            }
+        }
+
+        target = null;
+        if (possibleTargets.size > 0) target = possibleTargets.get(0);
+
+        for (Emplacement emp: emplacements) {
             emp.update(delta);
+            emp.setTarget(target);
         }
 
         if (curHull <= 0) {

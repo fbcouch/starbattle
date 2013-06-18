@@ -53,33 +53,41 @@ public class GameObject extends Group {
             if (new Rectangle(getX(), getY(), getWidth(), getHeight()).contains(moveTarget.x, moveTarget.y))
                 clearMoveTarget();
             else {
-                // get the direction vector for where to move
-                Vector2 moveVector = new Vector2(moveTarget).sub(getX() + getWidth() * 0.5f, getY() + getHeight() * 0.5f);
-                float angleToMove = moveVector.angle() - getRotation();
-
-                // clamp this between [-180, 180] so we know which way to move
-                while (angleToMove > 180) angleToMove -= 360;
-                while (angleToMove < -180) angleToMove += 360;
-
-                // rotate! TODO: create a property for rotation speed to use here
-                if (Math.abs(angleToMove) <= 5)
-                    setRotation(moveVector.angle());
-                else if (angleToMove > 0)
-                    setRotation((getRotation() + 5) % 360);
-                else
-                    setRotation((getRotation() - 5) % 360);
-
+                Vector2 moveVector = rotateToward(delta, moveTarget);
 
                 // TODO improve pathing
                 if (getRotation() == moveVector.angle()) {
-                    setAcceleration(new Vector2(10, 0).rotate(getRotation()));
+                    setAcceleration(new Vector2(maxAccel, 0).rotate(getRotation()));
                 } else {
                     if (velocity.len2() > 0) {
-                        setAcceleration(new Vector2(-10, 0).rotate(velocity.angle()));
+                        setAcceleration(new Vector2(-1 * maxAccel, 0).rotate(velocity.angle()));
                     }
                 }
             }
         }
+    }
+
+    protected Vector2 rotateToward(float delta, Vector2 target) {
+        return rotateToward(delta, target, 0);
+    }
+
+    protected Vector2 rotateToward(float delta, Vector2 target, float rotationOffset) {
+        // get the direction vector for where to move
+        Vector2 moveVector = new Vector2(target).sub(getX() + getWidth() * 0.5f, getY() + getHeight() * 0.5f);
+        float angleToMove = moveVector.angle() - getRotation() - rotationOffset;
+
+        // clamp this between [-180, 180] so we know which way to move
+        while (angleToMove > 180) angleToMove -= 360;
+        while (angleToMove < -180) angleToMove += 360;
+
+        // rotate!
+        if (Math.abs(angleToMove) <= turnSpeed * delta)
+            setRotation(moveVector.angle() - rotationOffset);
+        else if (angleToMove > 0)
+            setRotation((getRotation() + turnSpeed * delta) % 360);
+        else
+            setRotation((getRotation() - turnSpeed * delta) % 360);
+        return moveVector;
     }
 
     public boolean canCollide(GameObject other) {
@@ -155,5 +163,10 @@ public class GameObject extends Group {
     public static boolean collideRect(GameObject obj1, GameObject obj2) {
         return !(obj1.getX() > obj2.getRight() || obj2.getX() > obj1.getRight()
         || obj1.getY() > obj2.getTop() || obj2.getY() > obj1.getTop());
+    }
+
+    public static float getDistanceSq(GameObject obj1, GameObject obj2) {
+        return (float)(Math.pow((obj1.getX() + obj1.getWidth() * 0.5f) - (obj2.getX() + obj2.getWidth() * 0.5f), 2)
+                + Math.pow((obj1.getY() + obj1.getHeight() * 0.5f) - (obj2.getY() + obj2.getHeight() * 0.5f), 2));
     }
 }

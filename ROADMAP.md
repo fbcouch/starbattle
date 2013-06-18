@@ -25,7 +25,7 @@
     [ ] Basic gameplay
         [ ] Player and randomly spawned enemy ship
         [ ] Random enemy AI
-        [ ] Emplacements auto-target nearest enemy
+        [x] Emplacements auto-target nearest enemy
         [x] Ship destroyed on 0 health
 
 #### 2013-06-28

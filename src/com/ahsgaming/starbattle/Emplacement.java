@@ -16,10 +16,11 @@ public class Emplacement extends GameObject {
     String type = "";
     float fireRate, secSinceLastFire;
     float curAmmo, maxAmmo, regenAmmo;
-    float projInitSpeed, projMaxSpeed, projAccel, projLifetime, projDamage;     // probably will want all these defined
-                                                                                // in "projectile type"
+
     ShipLoader.JsonEmplacement proto;
     ShipLoader.JsonProjectile projectile;
+
+    Ship target;
 
     public Emplacement(String image) {
         super(image);
@@ -29,8 +30,6 @@ public class Emplacement extends GameObject {
         curAmmo = 1;
         maxAmmo = 10;
         regenAmmo = 1;
-        projInitSpeed = 300;
-        projMaxSpeed = 300;
 
     }
 
@@ -55,6 +54,14 @@ public class Emplacement extends GameObject {
     @Override
     public void update(float delta) {
         super.update(delta);
+
+        if (target != null) {
+            // translate target coords to local coords
+            Vector2 targetCoords = new Vector2(target.getX() + target.getWidth() * 0.5f, target.getY() + target.getHeight() * 0.5f);
+            Vector2 theseCoords = ((Ship)getParent()).convertToParentCoords(convertToParentCoords(new Vector2(getX() + getOriginX(), getY() + getOriginY())));
+            targetCoords.sub(theseCoords);
+            rotateToward(delta, targetCoords, getParent().getRotation());
+        }
 
         secSinceLastFire += delta;
         if (canFire()) {
@@ -87,5 +94,17 @@ public class Emplacement extends GameObject {
         bullet.setPosition(bulletOrigin.x, bulletOrigin.y);
         game.getGameController().addGameObject(bullet);
         curAmmo -= 1;
+    }
+
+    public Ship getTarget() {
+        return target;
+    }
+
+    public void setTarget(Ship target) {
+        this.target = target;
+    }
+
+    public float getRangeSq() {
+        return (float)Math.pow((projectile.maxSpeed * projectile.lifetime), 2);
     }
 }

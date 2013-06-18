@@ -48,8 +48,6 @@ public class GameController {
                 }
             }
 
-
-
             g.update(delta);
 
             if (g.isRemove())
@@ -65,6 +63,12 @@ public class GameController {
     public void removeGameObject(GameObject g) {
         gameObjects.removeValue(g, true);
         g.remove();
+    }
+
+    public Array<GameObject> getGameObjects() {
+        Array<GameObject> objs = new Array<GameObject>(gameObjects.size);
+        objs.addAll(gameObjects);
+        return objs;
     }
 
     public Group getGroupObjects() {
