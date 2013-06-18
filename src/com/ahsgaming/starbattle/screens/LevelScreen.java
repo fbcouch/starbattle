@@ -7,6 +7,7 @@ import com.ahsgaming.starbattle.StarBattle;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -30,7 +31,9 @@ public class LevelScreen extends AbstractScreen {
 
     TextureRegion bgImage;
 
-    float zoom = 1.0f;          // change this to zoom (lower = zoom in; higher = zoom out)
+    float zoom = 1f;          // change this to zoom (lower = zoom in; higher = zoom out)
+
+    Rectangle mapBounds = new Rectangle(0, 0, 1024, 1024);
 
     /**
      * Constructor
@@ -47,11 +50,13 @@ public class LevelScreen extends AbstractScreen {
         bgGroup = new Group();
         playerShip = new Ship(game.getShipLoader().getJsonShip("sloop"));
         playerShip.init();
+        playerShip.setPosition(mapBounds.x, mapBounds.y + mapBounds.getHeight() * 0.5f - playerShip.getHeight() * 0.5f);
         game.getGameController().addGameObject(playerShip);
 
         AIShip enemyShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
         enemyShip.init();
-        enemyShip.setPosition(200, 200);
+        enemyShip.setPosition(mapBounds.x + mapBounds.width - enemyShip.getWidth(), mapBounds.y + mapBounds.getHeight() * 0.5f - enemyShip.getHeight() * 0.5f);
+        enemyShip.setRotation(180);
         game.getGameController().addGameObject(enemyShip);
 
         bgImage = game.getTextureAtlas().createSprite("default_background");
@@ -85,10 +90,10 @@ public class LevelScreen extends AbstractScreen {
         stage.addActor(bgGroup);
         stage.addActor(levelGroup);
 
-        for (int x = -5; x < 5; x++) {
-            for (int y = -5; y < 5; y++) {
+        for (int x = 0; x < Math.ceil(mapBounds.getWidth() / bgImage.getRegionWidth()); x++) {
+            for (int y = 0; y < Math.ceil(mapBounds.getHeight() / bgImage.getRegionHeight()); y++) {
                 Image i = new Image(bgImage);
-                i.setPosition(x * bgImage.getRegionWidth(), y * bgImage.getRegionHeight());
+                i.setPosition(x * bgImage.getRegionWidth() + mapBounds.x, y * bgImage.getRegionHeight() + mapBounds.y);
                 bgGroup.addActor(i);
             }
         }
@@ -101,6 +106,18 @@ public class LevelScreen extends AbstractScreen {
         super.render(delta);
 
         camera.set(playerShip.getX() - (stage.getWidth() - playerShip.getWidth()) * 0.5f, playerShip.getY() - (stage.getHeight() - playerShip.getHeight()) * 0.5f);
+
+        // clamp camera to map bounds
+        if (camera.x < mapBounds.x) camera.x = mapBounds.x;
+        if (camera.x > mapBounds.x + mapBounds.width) camera.x = mapBounds.x + mapBounds.width;
+
+        if (camera.y < mapBounds.y) camera.y = mapBounds.y;
+        if (camera.y > mapBounds.y + mapBounds.height) camera.y = mapBounds.y + mapBounds.height;
+
+        if (mapBounds.width < stage.getWidth()) camera.x = mapBounds.x + mapBounds.width * 0.5f - stage.getWidth() * 0.5f;
+        if (mapBounds.height < stage.getHeight()) camera.y = mapBounds.y + mapBounds.height * 0.5f - stage.getHeight() * 0.5f;
+
+
         levelGroup.setPosition(-1 * camera.x, -1 * camera.y);
         bgGroup.setPosition(levelGroup.getX(), levelGroup.getY());
 
@@ -120,6 +137,11 @@ public class LevelScreen extends AbstractScreen {
                     shapeRenderer.end();
                 }
             }
+
+            shapeRenderer.begin(ShapeRenderer.ShapeType.Rectangle);
+            shapeRenderer.setColor(1, 1, 1, 1);
+            shapeRenderer.rect(mapBounds.x - camera.x, mapBounds.y - camera.y, mapBounds.width, mapBounds.height);
+            shapeRenderer.end();
 
         }
     }
