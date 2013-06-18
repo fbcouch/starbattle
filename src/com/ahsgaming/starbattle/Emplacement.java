@@ -85,7 +85,7 @@ public class Emplacement extends GameObject {
         );
 
         bullet.setPosition(bulletOrigin.x, bulletOrigin.y);
-        game.addGameObject(bullet);
+        game.getGameController().addGameObject(bullet);
         curAmmo -= 1;
     }
 }

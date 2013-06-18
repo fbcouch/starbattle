@@ -4,6 +4,7 @@ import com.ahsgaming.starbattle.json.ShipLoader;
 import com.ahsgaming.starbattle.screens.LevelScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -23,61 +24,41 @@ public class StarBattle extends Game {
 
     TextureAtlas textureAtlas;
     ShipLoader shipLoader;
+    GameController gameController;
 
-    Array<GameObject> gameObjects;
-    Group groupObjects;
+    FPSLogger fpsLogger;
 
     @Override
     public void create() {
         starBattle = this;
-        gameObjects = new Array<GameObject>();
+
         textureAtlas = new TextureAtlas(Gdx.files.local("assets/assets.atlas"));
         shipLoader = new ShipLoader("shiplist.json");
+        gameController = new GameController(this);
 
-        groupObjects = new Group();
         setScreen(new LevelScreen(this));
+
+        fpsLogger = new FPSLogger();
     }
 
     @Override
     public void render() {
         super.render();
 
-        float delta = Gdx.graphics.getDeltaTime();
+        gameController.update(Gdx.graphics.getDeltaTime());
 
-        for (GameObject g: gameObjects) {
-            // update velocity
-            g.getVelocity().add(new Vector2(g.getAcceleration().mul(delta)));
-            if (g.getVelocity().len2() > g.getMaxVelocity2())
-                g.getVelocity().div(g.getVelocity().len()).mul(g.getMaxSpeed());
-
-            g.setPosition(g.getX() + g.getVelocity().x * delta, g.getY() + g.getVelocity().y * delta);
-
-            g.update(delta);
-
-            if (g.isRemove())
-                removeGameObject(g);
-        }
-    }
-
-    public void addGameObject(GameObject g) {
-        gameObjects.add(g);
-        groupObjects.addActor(g);
-    }
-
-    public void removeGameObject(GameObject g) {
-        gameObjects.removeValue(g, true);
-        g.remove();
+        if (DEBUG) fpsLogger.log();
     }
 
     public TextureAtlas getTextureAtlas() {
         return textureAtlas;
     }
 
-    public Group getGroupObjects() {
-        return groupObjects;
-    }
-
     public ShipLoader getShipLoader() {
         return shipLoader;
+    }
+
+    public GameController getGameController() {
+        return gameController;
     }
 }

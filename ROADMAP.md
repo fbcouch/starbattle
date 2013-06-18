@@ -18,7 +18,7 @@
     [ ] Shiplist
         [x] create JSON model
         [x] write loader
-        [ ] load ships using loader
+        [x] load ships using loader
     [ ] Profile
         [ ] create JSON model
         [ ] save/load

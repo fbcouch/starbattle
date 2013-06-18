@@ -45,11 +45,11 @@ public class LevelScreen extends AbstractScreen {
         playerShip = new Ship(game.getShipLoader().getJsonShip("sloop"));
         playerShip.init();
         playerShip.setVelocity(new Vector2(20, 0));
-        game.addGameObject(playerShip);
+        game.getGameController().addGameObject(playerShip);
 
         bgImage = game.getTextureAtlas().createSprite("default_background");
 
-        levelGroup = game.getGroupObjects();
+        levelGroup = game.getGameController().getGroupObjects();
         camera = new Vector2();
 
         stage.addListener(new ClickListener() {
