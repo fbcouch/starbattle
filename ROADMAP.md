@@ -22,11 +22,12 @@
     [ ] Profile
         [ ] create JSON model
         [ ] save/load
-    [ ] Basic gameplay
-        [ ] Player and randomly spawned enemy ship
+    [x] Basic gameplay
+        [x] Player and randomly spawned enemy ship
         [x] Random enemy AI
         [x] Emplacements auto-target nearest enemy
         [x] Ship destroyed on 0 health
+        [x] Fix up aiming things
 
 #### 2013-06-28
     [ ] Advanced gameplay

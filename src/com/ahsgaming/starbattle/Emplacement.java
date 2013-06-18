@@ -23,6 +23,8 @@ public class Emplacement extends GameObject {
 
     Ship target;
 
+    public Vector2 targetCoords;
+
     public Emplacement(String image) {
         super(image);
 
@@ -62,8 +64,12 @@ public class Emplacement extends GameObject {
         secSinceLastFire += delta;         // TODO make this anticipate movement, etc
         if (target != null) {
             // translate target coords to local coords
-            Vector2 targetCoords = new Vector2(target.getX() + target.getWidth() * 0.5f, target.getY() + target.getHeight() * 0.5f);
-            Vector2 theseCoords = ((Ship)getParent()).convertToParentCoords(convertToParentCoords(new Vector2(getX() + getOriginX(), getY() + getOriginY())));
+            Vector2 targetCoords = new Vector2(target.getX() + target.getOriginX(), target.getY() + target.getOriginY());
+            if (this.targetCoords == null) this.targetCoords = new Vector2();
+            this.targetCoords.set(targetCoords);
+            Vector2 theseCoords = new Vector2(getOriginX(), getOriginY());
+            theseCoords = convertToParentCoords(theseCoords);
+            theseCoords = ((Ship)getParent()).convertToParentCoords(theseCoords);
             targetCoords.sub(theseCoords);
             float angle = rotateToward(delta, targetCoords, getParent().getRotation()).angle();
             if (angle - 5 < getRotation() && angle + 5 > getRotation()) {

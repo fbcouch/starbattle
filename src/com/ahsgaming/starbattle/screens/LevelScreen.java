@@ -1,9 +1,6 @@
 package com.ahsgaming.starbattle.screens;
 
-import com.ahsgaming.starbattle.AIShip;
-import com.ahsgaming.starbattle.GameObject;
-import com.ahsgaming.starbattle.Ship;
-import com.ahsgaming.starbattle.StarBattle;
+import com.ahsgaming.starbattle.*;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -50,7 +47,7 @@ public class LevelScreen extends AbstractScreen {
         bgGroup = new Group();
         playerShip = new Ship(game.getShipLoader().getJsonShip("sloop"));
         playerShip.init();
-        playerShip.setPosition(mapBounds.x, mapBounds.y + mapBounds.getHeight() * 0.5f - playerShip.getHeight() * 0.5f);
+        playerShip.setPosition(mapBounds.x, mapBounds.y + (mapBounds.getHeight()- playerShip.getHeight()) * 0.5f);
         game.getGameController().addGameObject(playerShip);
 
         AIShip enemyShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
@@ -124,17 +121,27 @@ public class LevelScreen extends AbstractScreen {
         if (game.DEBUG) {
             ShapeRenderer shapeRenderer = new ShapeRenderer();
 
-            shapeRenderer.setColor(0, 0, 1, 1);
+
             for (GameObject obj: game.getGameController().getGameObjects()) {
-                if (obj instanceof Ship && obj.getMoveTarget() != null) {
+                if (obj instanceof Ship) {
+
                     shapeRenderer.begin(ShapeRenderer.ShapeType.Circle);
-                    shapeRenderer.circle(obj.getMoveTarget().x - camera.x, obj.getMoveTarget().y - camera.y, 5);
+                    shapeRenderer.setColor(0, 0, 1, 1);
+                    if (obj.getMoveTarget() != null) shapeRenderer.circle(obj.getMoveTarget().x - camera.x, obj.getMoveTarget().y - camera.y, 5);
+                    shapeRenderer.setColor(1, 0, 0, 1);
+
+                    for (Emplacement emp: ((Ship)obj).getEmplacements()) {
+                        if (emp.targetCoords != null) shapeRenderer.circle(emp.targetCoords.x - camera.x, emp.targetCoords.y - camera.y, 5);
+                    }
                     shapeRenderer.end();
 
                     shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-                    shapeRenderer.line(obj.getX() + obj.getOriginX() - camera.x, obj.getY() + obj.getOriginY() - camera.y,
+                    shapeRenderer.setColor(0, 0, 1, 1);
+                    if (obj.getMoveTarget() != null)
+                        shapeRenderer.line(obj.getX() + obj.getOriginX() - camera.x, obj.getY() + obj.getOriginY() - camera.y,
                             obj.getMoveTarget().x - camera.x, obj.getMoveTarget().y - camera.y);
                     shapeRenderer.end();
+
                 }
             }
 

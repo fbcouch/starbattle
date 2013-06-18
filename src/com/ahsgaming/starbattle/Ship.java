@@ -152,6 +152,12 @@ public class Ship extends GameObject {
         }
     }
 
+    public Array<Emplacement> getEmplacements() {
+        Array<Emplacement> emps = new Array<Emplacement>(emplacements.size);
+        emps.addAll(emplacements);
+        return emps;
+    }
+
     public void addEmplacement(Emplacement emp) {
         emplacements.add(emp);
         addActor(emp);

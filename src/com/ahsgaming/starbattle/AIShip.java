@@ -21,7 +21,6 @@ public class AIShip extends Ship {
 
     @Override
     public void update(float delta) {
-
         // choose movement target
         sinceLastPathChange += delta;
         if (moveTarget == null || sinceLastPathChange > pathChangeEverySec) {

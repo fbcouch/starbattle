@@ -53,7 +53,7 @@ public class GameObject extends Group {
             if (new Rectangle(getX(), getY(), getWidth(), getHeight()).contains(moveTarget.x, moveTarget.y))
                 clearMoveTarget();
             else {
-                Vector2 moveVector = rotateToward(delta, moveTarget);
+                Vector2 moveVector = rotateToward(delta, new Vector2(moveTarget).sub(getX() + getOriginX(), getY() + getOriginY()));
 
                 // TODO improve pathing
                 if (getRotation() == moveVector.angle()) {
@@ -73,7 +73,7 @@ public class GameObject extends Group {
 
     protected Vector2 rotateToward(float delta, Vector2 target, float rotationOffset) {
         // get the direction vector for where to move
-        Vector2 moveVector = new Vector2(target).sub(getX() + getWidth() * 0.5f, getY() + getHeight() * 0.5f);
+        Vector2 moveVector = new Vector2(target);//.sub(getX() + getWidth() * 0.5f, getY() + getHeight() * 0.5f);
         float angleToMove = moveVector.angle() - getRotation() - rotationOffset;
 
         // clamp this between [-180, 180] so we know which way to move
