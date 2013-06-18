@@ -47,6 +47,11 @@ public class LevelScreen extends AbstractScreen {
         playerShip.setVelocity(new Vector2(20, 0));
         game.getGameController().addGameObject(playerShip);
 
+        Ship enemyShip = new Ship(game.getShipLoader().getJsonShip("sloop"));
+        enemyShip.init();
+        enemyShip.setPosition(200, 200);
+        game.getGameController().addGameObject(enemyShip);
+
         bgImage = game.getTextureAtlas().createSprite("default_background");
 
         levelGroup = game.getGameController().getGroupObjects();

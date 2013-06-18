@@ -18,12 +18,13 @@ public class Projectile extends GameObject {
     float damage, lifetime;
     GameObject owner;
 
-    public Projectile(String image) {
+    public Projectile(GameObject owner, String image) {
         super(image);
+        this.owner = owner;
     }
 
-    public Projectile(ShipLoader.JsonProjectile proto) {
-        this(proto.image);
+    public Projectile(GameObject owner, ShipLoader.JsonProjectile proto) {
+        this(owner, proto.image);
         this.proto = proto;
 
         this.damage = proto.damage;
@@ -48,5 +49,21 @@ public class Projectile extends GameObject {
         if (lifetime <= 0)
             setRemove(true);
 
+    }
+
+    @Override
+    public boolean canCollide(GameObject other) {
+        if (other instanceof Ship && owner != other)
+            return true;
+        return super.canCollide(other);
+    }
+
+    @Override
+    public void collide(GameObject other) {
+        super.collide(other);
+
+        other.takeDamage(damage);
+
+        setRemove(true);
     }
 }

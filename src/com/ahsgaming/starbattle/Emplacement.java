@@ -72,7 +72,7 @@ public class Emplacement extends GameObject {
     }
 
     public void fire() {
-        GameObject bullet = new Projectile(projectile);
+        GameObject bullet = new Projectile((Ship)getParent(), projectile);
 
         bullet.setRotation(getRotation() + getParent().getRotation());
 

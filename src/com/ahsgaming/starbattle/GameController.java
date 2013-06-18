@@ -1,5 +1,6 @@
 package com.ahsgaming.starbattle;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.utils.Array;
@@ -34,6 +35,20 @@ public class GameController {
                 g.getVelocity().div(g.getVelocity().len()).mul(g.getMaxSpeed());
 
             g.setPosition(g.getX() + g.getVelocity().x * delta, g.getY() + g.getVelocity().y * delta);
+
+            // collisions
+            for (int i = 0; i < gameObjects.size; i++) {
+                GameObject iobj = gameObjects.get(i);
+                for (int j = i + 1; j < gameObjects.size; j++) {
+                    GameObject jobj = gameObjects.get(j);
+                    if (iobj.canCollide(jobj) && jobj.canCollide(iobj) && GameObject.collideRect(iobj, jobj)) {
+                        iobj.collide(jobj);
+                        jobj.collide(iobj);
+                    }
+                }
+            }
+
+
 
             g.update(delta);
 

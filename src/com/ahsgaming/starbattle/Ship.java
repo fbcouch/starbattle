@@ -90,6 +90,11 @@ public class Ship extends GameObject {
             //emp.rotate(5 * (Math.random() >= 0.5 ? -1 : 1));
             emp.update(delta);
         }
+
+        if (curHull <= 0) {
+            setRemove(true);
+            for (Emplacement emp: emplacements) emp.setRemove(true);
+        }
     }
 
     @Override
@@ -103,6 +108,30 @@ public class Ship extends GameObject {
 
         healthBar.draw(batch, getX() + (getWidth() - healthBar.getWidth()) * 0.5f, getY(), parentAlpha);
         shieldBar.draw(batch, getX() + (getWidth() - shieldBar.getWidth()) * 0.5f, getY() + 3, parentAlpha);
+    }
+
+    @Override
+    public boolean canCollide(GameObject other) {
+        return true;
+    }
+
+    @Override
+    public void collide(GameObject other) {
+        super.collide(other);
+    }
+
+    @Override
+    public void takeDamage(float amount) {
+        super.takeDamage(amount);
+
+        amount -= armor;
+        if (amount > 0) {
+            curShield -= amount;
+            if (curShield < 0) {
+                curHull += curShield;
+                curShield = 0;
+            }
+        }
     }
 
     public void addEmplacement(Emplacement emp) {

@@ -82,6 +82,18 @@ public class GameObject extends Group {
         }
     }
 
+    public boolean canCollide(GameObject other) {
+        return false;
+    }
+
+    public void collide(GameObject other) {
+
+    }
+
+    public void takeDamage(float amount) {
+
+    }
+
     public Vector2 getVelocity() {
         return velocity;
     }
@@ -138,5 +150,10 @@ public class GameObject extends Group {
 
     public void setRemove(boolean remove) {
         this.remove = remove;
+    }
+
+    public static boolean collideRect(GameObject obj1, GameObject obj2) {
+        return !(obj1.getX() > obj2.getRight() || obj2.getX() > obj1.getRight()
+        || obj1.getY() > obj2.getTop() || obj2.getY() > obj1.getTop());
     }
 }
