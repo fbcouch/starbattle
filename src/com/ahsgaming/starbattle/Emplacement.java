@@ -55,23 +55,23 @@ public class Emplacement extends GameObject {
     public void update(float delta) {
         super.update(delta);
 
+        curAmmo += regenAmmo * delta;
+        if (curAmmo > maxAmmo) curAmmo = maxAmmo;
+
+        secSinceLastFire += delta;         // TODO make this anticipate movement, etc
         if (target != null) {
             // translate target coords to local coords
             Vector2 targetCoords = new Vector2(target.getX() + target.getWidth() * 0.5f, target.getY() + target.getHeight() * 0.5f);
             Vector2 theseCoords = ((Ship)getParent()).convertToParentCoords(convertToParentCoords(new Vector2(getX() + getOriginX(), getY() + getOriginY())));
             targetCoords.sub(theseCoords);
-            rotateToward(delta, targetCoords, getParent().getRotation());
+            float angle = rotateToward(delta, targetCoords, getParent().getRotation()).angle();
+            if (angle - 5 < getRotation() && angle + 5 > getRotation()) {
+                if (canFire()) {
+                    fire();
+                    secSinceLastFire = 0;
+                }
+            }
         }
-
-        secSinceLastFire += delta;
-        if (canFire()) {
-            fire();
-            secSinceLastFire = 0;
-        }
-
-        curAmmo += regenAmmo * delta;
-        if (curAmmo > maxAmmo) curAmmo = maxAmmo;
-
     }
 
     public boolean canFire() {

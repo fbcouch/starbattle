@@ -28,6 +28,7 @@ public class LevelScreen extends AbstractScreen {
 
     TextureRegion bgImage;
 
+    float zoom = 1.0f;          // change this to zoom (lower = zoom in; higher = zoom out)
 
     /**
      * Constructor
@@ -79,7 +80,7 @@ public class LevelScreen extends AbstractScreen {
 
     @Override
     public void resize(int width, int height) {
-        super.resize(width, height);
+        super.resize((int)(width * zoom), (int)(height * zoom));
         stage.addActor(bgGroup);
         stage.addActor(levelGroup);
 
