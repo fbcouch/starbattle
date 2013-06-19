@@ -19,10 +19,12 @@
         [x] create JSON model
         [x] write loader
         [x] load ships using loader
-    [x] Profile
+    [ ] Profile
         [x] create JSON model
         [x] load
         [x] save
+        [ ] Implement $$$
+        [ ] Track stats
     [x] Basic gameplay
         [x] Player and randomly spawned enemy ship
         [x] Random enemy AI
@@ -30,12 +32,36 @@
         [x] Ship destroyed on 0 health
         [x] Fix up aiming things
     [ ] Basic UI and UX
-        [ ] Main menu
+        [x] Main menu
         [ ] Profile selector
+    [ ] Gameover conditions
+        [ ] Teams
+        [ ] Lose when player ship destroyed
+        [ ] Win when all enemy ships destroyed
 
 #### 2013-06-28
-    [ ] Advanced gameplay
-    [ ] Ship shop
+    [ ] "Shop"
+        [ ] Buy/sell ships
+        [ ] Buy/sell emplacements
+    [ ] Missions
+        [ ] Tutorial
+        [ ] Short campaign
+    [ ] Assets
+        [ ] Multiple backgrounds
+        [ ] Ships
+            [ ] Updated sloop
+            [ ] Frigate
+            [ ] Corvette
+            [ ] Destroyer
+        [ ] Emplacements
+            [ ] Laser
+            [ ] Turbolaser
+            [ ] EMP
+            [ ] Tractor beam
+            [ ] Turbolaser array
+            [ ] Missile bank
+            [ ] Shield generator
+    [ ] Online profile service?
 
 #### 2013-07-04
     [ ] Release
