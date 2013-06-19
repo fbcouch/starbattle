@@ -15,14 +15,14 @@
         [x] Fire (automatic)
     
 #### 2013-06-21
-    [ ] Shiplist
+    [x] Shiplist
         [x] create JSON model
         [x] write loader
         [x] load ships using loader
-    [ ] Profile
+    [x] Profile
         [x] create JSON model
         [x] load
-        [ ] save
+        [x] save
     [x] Basic gameplay
         [x] Player and randomly spawned enemy ship
         [x] Random enemy AI

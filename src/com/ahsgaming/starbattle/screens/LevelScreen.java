@@ -1,7 +1,6 @@
 package com.ahsgaming.starbattle.screens;
 
 import com.ahsgaming.starbattle.*;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
@@ -9,7 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -45,7 +43,7 @@ public class LevelScreen extends AbstractScreen {
     public void show() {
         super.show();
         bgGroup = new Group();
-        playerShip = new Ship(game.getProfileLoader().getSelectedProfile().ships.first());
+        playerShip = new Ship(game.getProfileService().getSelectedProfile().ships.first());
         playerShip.init();
         playerShip.setPosition(mapBounds.x, mapBounds.y + (mapBounds.getHeight()- playerShip.getHeight()) * 0.5f);
         game.getGameController().addGameObject(playerShip);

@@ -4,7 +4,10 @@ import com.ahsgaming.starbattle.StarBattle;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonWriter;
 import com.badlogic.gdx.utils.ObjectMap;
+
+import java.io.IOException;
 
 /**
  * starbattle
@@ -49,6 +52,35 @@ public class ProfileService {
         selected = id;
     }
 
+    public void saveProfiles() {
+        PrettyJsonWriter writer = new PrettyJsonWriter(Gdx.files.local("assets/profiles/profiles.json").writer(false));
+
+        String json = "{" + Utils.toJsonProperty("selected", selected);
+        json += "profiles: [";
+        for (Profile p: profiles) {
+            json += "\"" + p.id + "\",";
+        }
+        json += "],";
+        json += "}";
+
+        try {
+            writer.write(json);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        for (Profile p: profiles) {
+            writer = new PrettyJsonWriter(Gdx.files.local("assets/profiles/" + p.id + ".json").writer(false));
+            try {
+                writer.write(p.toString());
+                writer.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public static class Profile {
         public String id;
         public Array<ShipLoader.JsonShip> ships;
@@ -77,6 +109,30 @@ public class ProfileService {
                     ships.add(ship);
                 }
             }
+        }
+
+        @Override
+        public String toString() {
+            String retString = "{";
+
+            retString += Utils.toJsonProperty("id", id);
+            retString += "ships: [";
+
+            for (ShipLoader.JsonShip ship: ships) {
+                retString += "{";
+                retString += Utils.toJsonProperty("id", ship.id);
+                retString += Utils.toJsonProperty("name", ship.name);
+                retString += "emplacements: [";
+                for (ShipLoader.JsonShipEmplacement emp: ship.emplacements) {
+                    retString += "\"" + emp.emplacement + "\",";
+                }
+                retString += "],";
+                retString += "},";
+            }
+
+            retString += "],";
+            retString += "}";
+            return retString;
         }
     }
 }

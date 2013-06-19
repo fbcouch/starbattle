@@ -1,11 +1,15 @@
 {
-    id: "unmei",
-    ships:
-    [
-        {
-            id: "sloop",
-            name: "Lindsay I",
-            emplacements: [ "red-laser", "laser" ],
-        },
-    ],
+  "id": "unmei",
+  ships: 
+  [
+    {
+      "id": "sloop",
+      "name": "Lindsay I",
+      emplacements: 
+      [
+        "red-laser",
+        "laser",
+      ],
+    },
+  ],
 }
