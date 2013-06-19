@@ -1,15 +1,12 @@
 package com.ahsgaming.starbattle;
 
-import com.ahsgaming.starbattle.json.ProfileLoader;
+import com.ahsgaming.starbattle.json.ProfileService;
 import com.ahsgaming.starbattle.json.ShipLoader;
 import com.ahsgaming.starbattle.screens.LevelScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.scenes.scene2d.Group;
-import com.badlogic.gdx.utils.Array;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,7 +22,7 @@ public class StarBattle extends Game {
 
     TextureAtlas textureAtlas;
     ShipLoader shipLoader;
-    ProfileLoader profileLoader;
+    ProfileService profileLoader;
     GameController gameController;
 
     FPSLogger fpsLogger;
@@ -36,7 +33,7 @@ public class StarBattle extends Game {
 
         textureAtlas = new TextureAtlas(Gdx.files.local("assets/assets.atlas"));
         shipLoader = new ShipLoader("shiplist.json");
-        profileLoader = new ProfileLoader("profiles.json");
+        profileLoader = new ProfileService("profiles.json");
         gameController = new GameController(this);
 
         setScreen(new LevelScreen(this));
@@ -61,7 +58,7 @@ public class StarBattle extends Game {
         return shipLoader;
     }
 
-    public ProfileLoader getProfileLoader() {
+    public ProfileService getProfileLoader() {
         return profileLoader;
     }
 

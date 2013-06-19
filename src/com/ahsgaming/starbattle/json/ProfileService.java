@@ -12,17 +12,17 @@ import com.badlogic.gdx.utils.ObjectMap;
  * Created on 6/18/13 by jami
  * ahsgaming.com
  */
-public class ProfileLoader {
-    public static final String LOG = "ProfileLoader";
+public class ProfileService {
+    public static final String LOG = "ProfileService";
 
     Array<Profile> profiles;
     String selected = "";
 
-    public ProfileLoader(String file) {
+    public ProfileService(String file) {
         JsonReader reader = new JsonReader();
         ObjectMap<String, Object> json = (ObjectMap<String, Object>)reader.parse(Gdx.files.local("assets/profiles/" + file));
 
-        selected = ShipLoader.getStringProperty(json, "selected");
+        selected = Utils.getStringProperty(json, "selected");
 
         profiles = new Array<Profile>();
         if (json.containsKey("profiles")) {
@@ -54,7 +54,7 @@ public class ProfileLoader {
         public Array<ShipLoader.JsonShip> ships;
 
         public Profile(ObjectMap<String, Object> json) {
-            id = ShipLoader.getStringProperty(json, "id");
+            id = Utils.getStringProperty(json, "id");
 
             ships = new Array<ShipLoader.JsonShip>();
             if (json.containsKey("ships")) {
@@ -62,9 +62,9 @@ public class ProfileLoader {
                 for (Object o: objs) {
                     ObjectMap<String, Object> om = (ObjectMap<String, Object>)o;
                     ShipLoader.JsonShip ship = new ShipLoader.JsonShip(StarBattle.starBattle.getShipLoader().getJsonShip(
-                            ShipLoader.getStringProperty(om, "id")));
+                            Utils.getStringProperty(om, "id")));
                     if (om.containsKey("name"))
-                        ship.name = ShipLoader.getStringProperty(om, "name");
+                        ship.name = Utils.getStringProperty(om, "name");
 
                     if (om.containsKey("emplacements")) {
                         Array<Object> emplArray = (Array<Object>)om.get("emplacements");

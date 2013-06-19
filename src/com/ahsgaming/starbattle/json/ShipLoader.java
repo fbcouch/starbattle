@@ -25,7 +25,7 @@ public class ShipLoader {
         JsonReader jsonReader = new JsonReader();
         ObjectMap<String, Object> json = (ObjectMap<String, Object>)jsonReader.parse(Gdx.files.local("assets/" + file));
 
-        version = getStringProperty(json, "version");
+        version = Utils.getStringProperty(json, "version");
 
         jsonShips = new Array<JsonShip>();
         if (json.containsKey("ships")) {
@@ -84,18 +84,18 @@ public class ShipLoader {
         public JsonShip(ObjectMap<String, Object> json) {
             this();
 
-            id = ShipLoader.getStringProperty(json, "id");
-            name = ShipLoader.getStringProperty(json, "name");
-            desc = ShipLoader.getStringProperty(json, "desc");
-            image = ShipLoader.getStringProperty(json, "image");
-            speed = ShipLoader.getFloatProperty(json, "speed");
-            turnSpeed = ShipLoader.getFloatProperty(json, "turn-speed");
-            accel = ShipLoader.getFloatProperty(json, "accel");
-            hull = ShipLoader.getFloatProperty(json, "hull");
-            hullRegen = ShipLoader.getFloatProperty(json, "hull-regen");
-            shield = ShipLoader.getFloatProperty(json, "shield");
-            shieldRegen = ShipLoader.getFloatProperty(json, "shield-regen");
-            armor = ShipLoader.getFloatProperty(json, "armor");
+            id =Utils.getStringProperty(json, "id");
+            name = Utils.getStringProperty(json, "name");
+            desc = Utils.getStringProperty(json, "desc");
+            image = Utils.getStringProperty(json, "image");
+            speed = Utils.getFloatProperty(json, "speed");
+            turnSpeed = Utils.getFloatProperty(json, "turn-speed");
+            accel = Utils.getFloatProperty(json, "accel");
+            hull = Utils.getFloatProperty(json, "hull");
+            hullRegen = Utils.getFloatProperty(json, "hull-regen");
+            shield = Utils.getFloatProperty(json, "shield");
+            shieldRegen = Utils.getFloatProperty(json, "shield-regen");
+            armor = Utils.getFloatProperty(json, "armor");
 
             if (json.containsKey("emplacements")) {
                 Array<Object> emps = (Array<Object>)json.get("emplacements");
@@ -133,17 +133,17 @@ public class ShipLoader {
         public String projectile = "";
 
         public JsonEmplacement(ObjectMap<String, Object> json) {
-            id = ShipLoader.getStringProperty(json, "id");
-            name = ShipLoader.getStringProperty(json, "name");
-            desc = ShipLoader.getStringProperty(json, "desc");
-            image = ShipLoader.getStringProperty(json, "image");
-            type = ShipLoader.getStringProperty(json, "type");
-            turnSpeed = ShipLoader.getFloatProperty(json, "turn-speed");
-            ammo = ShipLoader.getFloatProperty(json, "ammo");
-            maxAmmo = ShipLoader.getFloatProperty(json, "max-ammo");
-            ammoRegen = ShipLoader.getFloatProperty(json, "ammo-regen");
-            fireRate = ShipLoader.getFloatProperty(json, "fire-rate");
-            projectile = ShipLoader.getStringProperty(json, "projectile");
+            id = Utils.getStringProperty(json, "id");
+            name = Utils.getStringProperty(json, "name");
+            desc = Utils.getStringProperty(json, "desc");
+            image = Utils.getStringProperty(json, "image");
+            type = Utils.getStringProperty(json, "type");
+            turnSpeed = Utils.getFloatProperty(json, "turn-speed");
+            ammo = Utils.getFloatProperty(json, "ammo");
+            maxAmmo = Utils.getFloatProperty(json, "max-ammo");
+            ammoRegen = Utils.getFloatProperty(json, "ammo-regen");
+            fireRate = Utils.getFloatProperty(json, "fire-rate");
+            projectile = Utils.getStringProperty(json, "projectile");
         }
     }
 
@@ -153,9 +153,9 @@ public class ShipLoader {
         public Array<String> fits;
 
         public JsonShipEmplacement(ObjectMap<String, Object> json) {
-            emplacement = ShipLoader.getStringProperty(json, "emplacement");
-            x = ShipLoader.getFloatProperty(json, "x");
-            y = ShipLoader.getFloatProperty(json, "y");
+            emplacement = Utils.getStringProperty(json, "emplacement");
+            x = Utils.getFloatProperty(json, "x");
+            y = Utils.getFloatProperty(json, "y");
             fits = new Array<String>();
             if (json.containsKey("fits")) {
                 Array<Object> f = (Array<Object>)json.get("fits");
@@ -178,25 +178,13 @@ public class ShipLoader {
         public float initSpeed, maxSpeed, accel, lifetime, damage;
 
         public JsonProjectile(ObjectMap<String, Object> json) {
-            id = ShipLoader.getStringProperty(json, "id");
-            image = ShipLoader.getStringProperty(json, "image");
-            initSpeed = ShipLoader.getFloatProperty(json, "init-speed");
-            maxSpeed = ShipLoader.getFloatProperty(json, "max-speed");
-            accel = ShipLoader.getFloatProperty(json, "accel");
-            lifetime = ShipLoader.getFloatProperty(json, "lifetime");
-            damage = ShipLoader.getFloatProperty(json, "damage");
+            id = Utils.getStringProperty(json, "id");
+            image = Utils.getStringProperty(json, "image");
+            initSpeed = Utils.getFloatProperty(json, "init-speed");
+            maxSpeed = Utils.getFloatProperty(json, "max-speed");
+            accel = Utils.getFloatProperty(json, "accel");
+            lifetime = Utils.getFloatProperty(json, "lifetime");
+            damage = Utils.getFloatProperty(json, "damage");
         }
-    }
-
-    public static String getStringProperty(ObjectMap<String, Object> json, String id) {
-        if (json.containsKey(id))
-            return json.get(id).toString();
-        return "";
-    }
-
-    public static float getFloatProperty(ObjectMap<String, Object> json, String id) {
-        if (json.containsKey(id))
-            return Float.parseFloat(json.get(id).toString());
-        return 0;
     }
 }
