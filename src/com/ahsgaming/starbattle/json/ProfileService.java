@@ -48,6 +48,12 @@ public class ProfileService {
         return getProfile(selected);
     }
 
+    public Array<Profile> getProfiles() {
+        Array<Profile> profiles = new Array<Profile>(this.profiles.size);
+        profiles.addAll(this.profiles);
+        return profiles;
+    }
+
     public void setSelectedProfile(String id) {
         selected = id;
     }

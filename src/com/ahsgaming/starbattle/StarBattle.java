@@ -4,6 +4,7 @@ import com.ahsgaming.starbattle.json.ProfileService;
 import com.ahsgaming.starbattle.json.ShipLoader;
 import com.ahsgaming.starbattle.screens.LevelScreen;
 import com.ahsgaming.starbattle.screens.MainMenuScreen;
+import com.ahsgaming.starbattle.screens.OptionsScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.FPSLogger;
@@ -35,7 +36,6 @@ public class StarBattle extends Game {
         textureAtlas = new TextureAtlas(Gdx.files.local("assets/assets.atlas"));
         shipLoader = new ShipLoader("shiplist.json");
         profileService = new ProfileService("profiles.json");
-        gameController = new GameController(this);
 
         setScreen(new MainMenuScreen(this));
 
@@ -48,9 +48,28 @@ public class StarBattle extends Game {
     public void render() {
         super.render();
 
-        gameController.update(Gdx.graphics.getDeltaTime());
+        if (gameController != null) gameController.update(Gdx.graphics.getDeltaTime());
 
         if (DEBUG) fpsLogger.log();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        if (profileService != null) profileService.saveProfiles();
+    }
+
+    public void exit() {
+        Gdx.app.exit();
+    }
+
+    public void showOptions() {
+        setScreen(new OptionsScreen(this));
+    }
+
+    public void startLevel() {
+        gameController = new GameController(this);
+        setScreen(new LevelScreen(this));
     }
 
     public TextureAtlas getTextureAtlas() {

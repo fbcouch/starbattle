@@ -1,5 +1,6 @@
 package com.ahsgaming.starbattle;
 
+import com.ahsgaming.starbattle.json.ProfileService;
 import com.ahsgaming.starbattle.json.ShipLoader;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -29,6 +30,8 @@ public class Ship extends GameObject {
     ShipLoader.JsonShip proto;
 
     Ship target;
+
+    ProfileService.Profile owner;
 
     public Ship(String image) {
         super(image);
@@ -61,6 +64,10 @@ public class Ship extends GameObject {
         armor = proto.armor;
     }
 
+    public Ship(ShipLoader.JsonShip proto, ProfileService.Profile owner) {
+        this(proto);
+        this.owner = owner;
+    }
 
     @Override
     public void init() {
@@ -223,5 +230,13 @@ public class Ship extends GameObject {
 
     public void setArmor(float armor) {
         this.armor = armor;
+    }
+
+    public ProfileService.Profile getOwner() {
+        return owner;
+    }
+
+    public void setOwner(ProfileService.Profile owner) {
+        this.owner = owner;
     }
 }

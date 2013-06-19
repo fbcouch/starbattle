@@ -1,8 +1,10 @@
 package com.ahsgaming.starbattle.screens;
 
 import com.ahsgaming.starbattle.StarBattle;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
  * starbattle
@@ -51,5 +53,32 @@ public class MainMenuScreen extends AbstractScreen {
         table.add(btnExit).size(350, 100).pad(10);
 
         table.row();
+
+        btnPlay.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+                game.startLevel(); // TODO implement game setup
+            }
+        });
+
+        btnOptions.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+                game.showOptions();
+            }
+        });
+
+        btnExit.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+
+                game.exit();
+            }
+        });
     }
 }
