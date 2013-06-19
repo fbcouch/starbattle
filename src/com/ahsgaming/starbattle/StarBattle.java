@@ -1,5 +1,6 @@
 package com.ahsgaming.starbattle;
 
+import com.ahsgaming.starbattle.json.ProfileLoader;
 import com.ahsgaming.starbattle.json.ShipLoader;
 import com.ahsgaming.starbattle.screens.LevelScreen;
 import com.badlogic.gdx.Game;
@@ -24,6 +25,7 @@ public class StarBattle extends Game {
 
     TextureAtlas textureAtlas;
     ShipLoader shipLoader;
+    ProfileLoader profileLoader;
     GameController gameController;
 
     FPSLogger fpsLogger;
@@ -34,6 +36,7 @@ public class StarBattle extends Game {
 
         textureAtlas = new TextureAtlas(Gdx.files.local("assets/assets.atlas"));
         shipLoader = new ShipLoader("shiplist.json");
+        profileLoader = new ProfileLoader("profiles.json");
         gameController = new GameController(this);
 
         setScreen(new LevelScreen(this));
@@ -56,6 +59,10 @@ public class StarBattle extends Game {
 
     public ShipLoader getShipLoader() {
         return shipLoader;
+    }
+
+    public ProfileLoader getProfileLoader() {
+        return profileLoader;
     }
 
     public GameController getGameController() {

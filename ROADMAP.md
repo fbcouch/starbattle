@@ -20,14 +20,18 @@
         [x] write loader
         [x] load ships using loader
     [ ] Profile
-        [ ] create JSON model
-        [ ] save/load
+        [x] create JSON model
+        [x] load
+        [ ] save
     [x] Basic gameplay
         [x] Player and randomly spawned enemy ship
         [x] Random enemy AI
         [x] Emplacements auto-target nearest enemy
         [x] Ship destroyed on 0 health
         [x] Fix up aiming things
+    [ ] Basic UI and UX
+        [ ] Main menu
+        [ ] Profile selector
 
 #### 2013-06-28
     [ ] Advanced gameplay

@@ -105,6 +105,26 @@ public class ShipLoader {
                 }
             }
         }
+
+        public JsonShip(JsonShip ship) {
+            id = ship.id;
+            name = ship.name;
+            desc = ship.desc;
+            image = ship.image;
+            speed = ship.speed;
+            turnSpeed = ship.turnSpeed;
+            accel = ship.accel;
+            hull = ship.hull;
+            hullRegen = ship.hullRegen;
+            shield = ship.shield;
+            shieldRegen = ship.shieldRegen;
+            armor = ship.armor;
+
+            emplacements = new Array<JsonShipEmplacement>();
+            for (JsonShipEmplacement jse: ship.emplacements) {
+                emplacements.add(new JsonShipEmplacement(jse));
+            }
+        }
     }
 
     public static class JsonEmplacement {
@@ -142,6 +162,14 @@ public class ShipLoader {
                 for (Object fo: f)
                     fits.add(fo.toString());
             }
+        }
+
+        public JsonShipEmplacement(JsonShipEmplacement jse) {
+            emplacement = jse.emplacement;
+            x = jse.x;
+            y = jse.y;
+            fits = new Array<String>();
+            fits.addAll(jse.fits);
         }
     }
 

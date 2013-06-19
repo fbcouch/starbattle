@@ -45,7 +45,7 @@ public class LevelScreen extends AbstractScreen {
     public void show() {
         super.show();
         bgGroup = new Group();
-        playerShip = new Ship(game.getShipLoader().getJsonShip("sloop"));
+        playerShip = new Ship(game.getProfileLoader().getSelectedProfile().ships.first());
         playerShip.init();
         playerShip.setPosition(mapBounds.x, mapBounds.y + (mapBounds.getHeight()- playerShip.getHeight()) * 0.5f);
         game.getGameController().addGameObject(playerShip);
