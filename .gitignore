@@ -2,3 +2,4 @@ bin
 builds
 out/
 .idea/workspace.xml
+.project

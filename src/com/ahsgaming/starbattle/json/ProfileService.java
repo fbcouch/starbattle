@@ -100,6 +100,7 @@ public class ProfileService {
         public Array<ShipLoader.JsonShip> ships;
         public Array<StatService.StatEntry> shipStats;
         public StatService.StatEntry stats;
+        public int money;
 
         public Profile(ObjectMap<String, Object> json) {
             id = Utils.getStringProperty(json, "id");
@@ -137,6 +138,8 @@ public class ProfileService {
                 stats = new StatService.StatEntry(json.get("stats"));
             else
                 stats = new StatService.StatEntry();
+
+            money = Utils.getIntProperty(json, "money");
         }
 
         @Override
