@@ -2,14 +2,9 @@ package com.ahsgaming.starbattle;
 
 import com.ahsgaming.starbattle.json.ProfileService;
 import com.ahsgaming.starbattle.json.ShipLoader;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
-
-import java.util.Random;
 
 /**
  * Created with IntelliJ IDEA.
@@ -161,7 +156,8 @@ public class Ship extends GameObject {
             }
         }
 
-        game.getStatService().addStat(from, this, amount);
+        game.getStatService().addDamageStat(from, this, amount);
+        game.getStatService().shotHit(from);
 
         return amount;
     }

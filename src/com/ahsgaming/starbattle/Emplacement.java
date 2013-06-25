@@ -92,7 +92,7 @@ public class Emplacement extends GameObject {
 
         bullet.init();
 
-        // TODO fix this - doesn't work exactly right
+        game.getStatService().shotFired((GameObject)this.getParent());
 
         Vector2 bulletOrigin = ((GameObject)getParent()).convertToParentCoords(
                 convertToParentCoords(new Vector2(getWidth(), (getHeight() - bullet.getHeight()) * 0.5f))

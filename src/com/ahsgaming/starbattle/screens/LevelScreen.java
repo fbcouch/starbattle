@@ -32,8 +32,8 @@ public class LevelScreen extends AbstractScreen {
     Rectangle mapBounds = new Rectangle(0, 0, 1024, 1024);
 
     // TODO turn this into a fully fledged hud
-    Label damageDealt;
-    Label damageTaken;
+    Label damageDealt, damageTaken;
+    Label shots;
 
     /**
      * Constructor
@@ -117,12 +117,15 @@ public class LevelScreen extends AbstractScreen {
 
         damageDealt = new Label("Damage Dealt: 0", getSkin());
         damageTaken = new Label("Damage Taken: 0", getSkin());
+        shots = new Label("Accuracy: 0/0 (0%)", getSkin());
 
         damageDealt.setPosition(0, 0);
         damageTaken.setPosition(0, damageDealt.getTop());
+        shots.setPosition(0, damageTaken.getTop());
 
         stage.addActor(damageDealt);
         stage.addActor(damageTaken);
+        stage.addActor(shots);
     }
 
     @Override
@@ -148,7 +151,13 @@ public class LevelScreen extends AbstractScreen {
         // update HUD
         damageDealt.setText(String.format("Damage Dealt: %.0f", game.getStatService().getDamageDealtBy(playerShip)));
         damageTaken.setText(String.format("Damage Taken: %.0f", game.getStatService().getDamageTakenBy(playerShip)));
+        int shotsFired = game.getStatService().getShotsFiredBy(playerShip);
+        int shotsHit = game.getStatService().getShotsHitBy(playerShip);
+        float accuracy = 0;
+        if (shotsFired > 0)
+            accuracy = shotsHit / shotsFired * 100;
 
+        shots.setText(String.format("Shots: %d / %d (%.1f%%)", shotsHit, shotsFired, accuracy));
 
         if (game.DEBUG) {
             ShapeRenderer shapeRenderer = new ShapeRenderer();
