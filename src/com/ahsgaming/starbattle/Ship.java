@@ -135,7 +135,7 @@ public class Ship extends GameObject {
 
     @Override
     public boolean canCollide(GameObject other) {
-        return true;
+        return !isRemove();
     }
 
     @Override

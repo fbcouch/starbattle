@@ -53,8 +53,8 @@ public class Projectile extends GameObject {
 
     @Override
     public boolean canCollide(GameObject other) {
-        if (other instanceof Ship && owner != other)
-            return true;
+        if (other instanceof Ship && owner != other && (other.getTeam() > 0 && other.getTeam() != owner.getTeam()))
+            return !isRemove();
         return super.canCollide(other);
     }
 

@@ -24,7 +24,7 @@
         [x] load
         [x] save
         [ ] Implement $$$
-        [ ] Track stats
+        [x] Track stats
     [x] Basic gameplay
         [x] Player and randomly spawned enemy ship
         [x] Random enemy AI
