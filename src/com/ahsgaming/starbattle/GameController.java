@@ -20,15 +20,37 @@ public class GameController {
     Array<GameObject> gameObjects;
     Group groupObjects;
 
+    Array<GameObject> team1, team2;
+
+    Ship playerShip;
+
+    public enum GameState {
+        GS_RUNNING, GS_PAUSED, GS_OVER;
+    }
+
+    GameState gameState;
+
     public GameController(StarBattle game) {
         this.game = game;
 
         gameObjects = new Array<GameObject>();
         groupObjects = new Group();
+
+        gameState = GameState.GS_RUNNING;
     }
 
     public void update(float delta) {
-        for (GameObject g: gameObjects) {
+
+        if (gameState == GameState.GS_OVER || gameState == GameState.GS_PAUSED) {
+            return; // TODO we may want to actually do something here eventually
+        }
+
+        team1 = new Array<GameObject>();
+        team2 = new Array<GameObject>();
+
+        for (int k = 0; k < gameObjects.size; k++) {
+            GameObject g = gameObjects.get(k);
+
             // update velocity
             g.getVelocity().add(new Vector2(g.getAcceleration().mul(delta)));
             if (g.getVelocity().len2() > g.getMaxVelocity2())
@@ -50,8 +72,25 @@ public class GameController {
 
             g.update(delta);
 
-            if (g.isRemove())
+            if (g.isRemove()) {
                 removeGameObject(g);
+                k--;
+            }
+
+            if (!g.isRemove()) {
+                switch(g.getTeam()) {
+                    case 1:
+                        team1.add(g);
+                        break;
+                    case 2:
+                        team2.add(g);
+                }
+            }
+        }
+
+        if (team1.size == 0 || team2.size == 0 || (playerShip != null && playerShip.isRemove())) {
+            // gameover!
+            gameState = GameState.GS_OVER;
         }
     }
 
@@ -73,5 +112,21 @@ public class GameController {
 
     public Group getGroupObjects() {
         return groupObjects;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
+    }
+
+    public Ship getPlayerShip() {
+        return playerShip;
+    }
+
+    public void setPlayerShip(Ship playerShip) {
+        this.playerShip = playerShip;
     }
 }

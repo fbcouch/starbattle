@@ -34,10 +34,10 @@
     [ ] Basic UI and UX
         [x] Main menu
         [ ] Profile selector
-    [ ] Gameover conditions
-        [ ] Teams
-        [ ] Lose when player ship destroyed
-        [ ] Win when all enemy ships destroyed
+    [x] Gameover conditions
+        [x] Teams
+        [x] Lose when player ship destroyed
+        [x] Win when all enemy ships destroyed
 
 #### 2013-06-28
     [ ] "Shop"

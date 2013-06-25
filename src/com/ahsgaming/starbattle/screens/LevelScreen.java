@@ -45,14 +45,30 @@ public class LevelScreen extends AbstractScreen {
         bgGroup = new Group();
         playerShip = new Ship(game.getProfileService().getSelectedProfile().ships.first());
         playerShip.init();
+        playerShip.setTeam(1);
         playerShip.setPosition(mapBounds.x, mapBounds.y + (mapBounds.getHeight()- playerShip.getHeight()) * 0.5f);
         game.getGameController().addGameObject(playerShip);
+        game.getGameController().setPlayerShip(playerShip);
 
-        AIShip enemyShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
-        enemyShip.init();
-        enemyShip.setPosition(mapBounds.x + mapBounds.width - enemyShip.getWidth(), mapBounds.y + mapBounds.getHeight() * 0.5f - enemyShip.getHeight() * 0.5f);
-        enemyShip.setRotation(180);
-        game.getGameController().addGameObject(enemyShip);
+        AIShip otherShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
+        otherShip.init();
+        otherShip.setTeam(2);
+        otherShip.setPosition(mapBounds.x + mapBounds.width - otherShip.getWidth(), mapBounds.y + mapBounds.getHeight() * 0.5f - otherShip.getHeight() * 0.5f);
+        otherShip.setRotation(180);
+        game.getGameController().addGameObject(otherShip);
+
+        otherShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
+        otherShip.init();
+        otherShip.setTeam(2);
+        otherShip.setPosition(mapBounds.x + mapBounds.width - otherShip.getWidth(), mapBounds.y + mapBounds.getHeight() * 0.5f - otherShip.getHeight() * 0.5f + 200);
+        otherShip.setRotation(180);
+        game.getGameController().addGameObject(otherShip);
+
+        otherShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
+        otherShip.init();
+        otherShip.setTeam(1);
+        otherShip.setPosition(mapBounds.x, mapBounds.y + mapBounds.getHeight() * 0.5f - otherShip.getHeight() * 0.5f + 200);
+        game.getGameController().addGameObject(otherShip);
 
         bgImage = game.getTextureService().createSprite("default_background");
 
