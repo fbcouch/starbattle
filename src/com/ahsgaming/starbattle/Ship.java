@@ -2,6 +2,7 @@ package com.ahsgaming.starbattle;
 
 import com.ahsgaming.starbattle.json.ProfileService;
 import com.ahsgaming.starbattle.json.ShipLoader;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -103,7 +104,8 @@ public class Ship extends GameObject {
 
         Array<Ship> possibleTargets = new Array<Ship>();
         for (GameObject obj: game.getGameController().getGameObjects()) {
-            if (obj instanceof Ship && obj != this && GameObject.getDistanceSq(this, obj) <= rangesq) {
+            if (obj.getTeam() != getTeam() && obj instanceof Ship &&
+                    obj != this && GameObject.getDistanceSq(this, obj) <= rangesq) {
                 possibleTargets.add((Ship)obj);
             }
         }

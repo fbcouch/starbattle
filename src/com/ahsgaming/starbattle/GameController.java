@@ -22,6 +22,8 @@ public class GameController {
 
     Array<GameObject> team1, team2;
 
+    Ship playerShip;
+
     public enum GameState {
         GS_RUNNING, GS_PAUSED, GS_OVER;
     }
@@ -45,7 +47,10 @@ public class GameController {
 
         team1 = new Array<GameObject>();
         team2 = new Array<GameObject>();
-        for (GameObject g: gameObjects) {
+
+        for (int k = 0; k < gameObjects.size; k++) {
+            GameObject g = gameObjects.get(k);
+
             // update velocity
             g.getVelocity().add(new Vector2(g.getAcceleration().mul(delta)));
             if (g.getVelocity().len2() > g.getMaxVelocity2())
@@ -67,8 +72,10 @@ public class GameController {
 
             g.update(delta);
 
-            if (g.isRemove())
+            if (g.isRemove()) {
                 removeGameObject(g);
+                k--;
+            }
 
             if (!g.isRemove()) {
                 switch(g.getTeam()) {
@@ -81,7 +88,7 @@ public class GameController {
             }
         }
 
-        if (team1.size == 0 || team2.size == 0) {
+        if (team1.size == 0 || team2.size == 0 || (playerShip != null && playerShip.isRemove())) {
             // gameover!
             gameState = GameState.GS_OVER;
         }
@@ -113,5 +120,13 @@ public class GameController {
 
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
+    }
+
+    public Ship getPlayerShip() {
+        return playerShip;
+    }
+
+    public void setPlayerShip(Ship playerShip) {
+        this.playerShip = playerShip;
     }
 }
