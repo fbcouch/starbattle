@@ -63,6 +63,12 @@ public class Utils {
             return Float.parseFloat(json.get(id).toString());
         return 0;
     }
+
+    public static int getIntProperty(ObjectMap<String, Object> json, String id) {
+        if (json.containsKey(id))
+            return (int)Float.parseFloat(json.get(id).toString());
+        return 0;
+    }
 	
 	/**
 	 * Random id code adapted from 

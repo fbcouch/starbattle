@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1af02a52-970c-445b-8139-8ac12b95cb11" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/Emplacement.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/Emplacement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/LevelScreen.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/LevelScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/Ship.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/Ship.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/ProfileService.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/ProfileService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/StatService.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/StatService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/shiplist.json" afterPath="$PROJECT_DIR$/assets/shiplist.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/Utils.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/Utils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/profiles/unmei.json" afterPath="$PROJECT_DIR$/assets/profiles/unmei.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="starbattle.iws" />
@@ -30,10 +29,11 @@
     <file path="/GameController.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372181844189" ignored="false" />
     <file path="/AIShip.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1371585556134" ignored="false" />
     <file path="/ProfileLoader.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1371650838537" ignored="false" />
-    <file path="/ProfileService.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372190823526" ignored="false" />
+    <file path="/ProfileService.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372193684687" ignored="false" />
     <file path="/MainMenuScreen.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1371668660140" ignored="false" />
     <file path="/OptionsScreen.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1371671217389" ignored="false" />
-    <file path="/StatService.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372191774623" ignored="false" />
+    <file path="/StatService.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372193327957" ignored="false" />
+    <file path="/Utils.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372193248457" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,15 +109,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="shiplist.json" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/assets/shiplist.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="24" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.81904763">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Ship.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/Ship.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -130,7 +121,7 @@
       <file leaf-file-name="StatService.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/StatService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="67" selection-start="1898" selection-end="1898" vertical-scroll-proportion="0.0">
+            <state line="113" column="24" selection-start="3447" selection-end="3447" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -147,10 +138,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProfileService.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ProfileService.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/ProfileService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="91" column="48" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.0">
+            <state line="154" column="13" selection-start="5412" selection-end="5412" vertical-scroll-proportion="4.033203">
               <folding />
             </state>
           </provider>
@@ -210,7 +201,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/Utils.java" />
         <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/ProfileLoader.java" />
         <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/MainMenuScreen.java" />
         <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/OptionsScreen.java" />
@@ -219,13 +209,14 @@
         <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/GameObject.java" />
         <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/StarBattle.java" />
         <option value="$PROJECT_DIR$/ROADMAP.md" />
-        <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/ProfileService.java" />
-        <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/StatService.java" />
         <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/Emplacement.java" />
         <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/Projectile.java" />
         <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/Ship.java" />
         <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/LevelScreen.java" />
         <option value="$PROJECT_DIR$/assets/shiplist.json" />
+        <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/Utils.java" />
+        <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/StatService.java" />
+        <option value="$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/ProfileService.java" />
       </list>
     </option>
   </component>
@@ -696,13 +687,6 @@
         <state line="61" column="0" selection-start="1968" selection-end="1968" vertical-scroll-proportion="0.63151515" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="0" selection-start="1364" selection-end="1364" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/MainMenuScreen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="61" column="63" selection-start="1527" selection-end="1527" vertical-scroll-proportion="0.0">
@@ -731,29 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ROADMAP.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="10" selection-start="619" selection-end="619" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/ProfileService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="48" selection-start="2729" selection-end="2729" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/StatService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="67" selection-start="1898" selection-end="1898" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/GameObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="107" column="57" selection-start="3393" selection-end="3393" vertical-scroll-proportion="0.0">
@@ -775,16 +736,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/Projectile.java">
+    <entry file="file://$PROJECT_DIR$/assets/shiplist.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="75" selection-start="1626" selection-end="1626" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/Ship.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="12" selection-start="3896" selection-end="3896" vertical-scroll-proportion="0.0">
+        <state line="59" column="24" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.81904763">
           <folding />
         </state>
       </provider>
@@ -796,9 +750,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/shiplist.json">
+    <entry file="file://$PROJECT_DIR$/ROADMAP.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="24" selection-start="1486" selection-end="1486" vertical-scroll-proportion="0.81904763">
+        <state line="26" column="10" selection-start="619" selection-end="619" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/Ship.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="139" column="12" selection-start="3896" selection-end="3896" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/Utils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="69" column="17" selection-start="1964" selection-end="1964" vertical-scroll-proportion="0.92761904">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/Projectile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="75" selection-start="1626" selection-end="1626" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/StatService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="113" column="24" selection-start="3447" selection-end="3447" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/json/ProfileService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="154" column="13" selection-start="5412" selection-end="5412" vertical-scroll-proportion="4.033203">
           <folding />
         </state>
       </provider>

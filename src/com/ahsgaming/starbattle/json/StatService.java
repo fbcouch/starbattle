@@ -79,4 +79,39 @@ public class StatService {
             this.amount = amount;
         }
     }
+
+    public static class StatEntry {
+        public float damageTaken, damageDealt;
+        public int shotsTaken, shotsHit;
+
+        public StatEntry() {
+
+        }
+
+        public StatEntry(float damageTaken, float damageDealt, int shotsTaken, int shotsHit) {
+            this.damageTaken = damageTaken;
+            this.damageDealt = damageDealt;
+            this.shotsHit = shotsHit;
+            this.shotsTaken = shotsTaken;
+        }
+
+        public StatEntry(Object json) {
+            ObjectMap<String, Object> om = (ObjectMap<String, Object>)json;
+
+            damageTaken = Utils.getFloatProperty(om, "damage-taken");
+            damageDealt = Utils.getFloatProperty(om, "damage-dealt");
+            shotsHit = Utils.getIntProperty(om, "shots-hit");
+            shotsTaken = Utils.getIntProperty(om, "shots-taken");
+        }
+
+        @Override
+        public String toString() {
+            return "{" +
+                    Utils.toJsonProperty("damage-taken", damageTaken) +
+                    Utils.toJsonProperty("damage-dealt", damageDealt) +
+                    Utils.toJsonProperty("shots-hit", shotsHit) +
+                    Utils.toJsonProperty("shots-taken", shotsTaken) +
+                    "}";
+        }
+    }
 }

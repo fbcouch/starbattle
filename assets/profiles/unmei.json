@@ -10,6 +10,20 @@
         "red-laser",
         "laser",
       ],
+      "stats": 
+      {
+        "damage-taken": 0.0,
+        "damage-dealt": 0.0,
+        "shots-hit": 0,
+        "shots-taken": 0,
+      },
     },
   ],
+  "stats": 
+  {
+    "damage-taken": 0.0,
+    "damage-dealt": 0.0,
+    "shots-hit": 0,
+    "shots-taken": 0,
+  },
 }

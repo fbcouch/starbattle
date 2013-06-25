@@ -90,11 +90,14 @@ public class ProfileService {
     public static class Profile {
         public String id;
         public Array<ShipLoader.JsonShip> ships;
+        public Array<StatService.StatEntry> shipStats;
+        public StatService.StatEntry stats;
 
         public Profile(ObjectMap<String, Object> json) {
             id = Utils.getStringProperty(json, "id");
 
             ships = new Array<ShipLoader.JsonShip>();
+            shipStats = new Array<StatService.StatEntry>();
             if (json.containsKey("ships")) {
                 Array<Object> objs = (Array<Object>) json.get("ships");
                 for (Object o: objs) {
@@ -113,8 +116,19 @@ public class ProfileService {
                         }
                     }
                     ships.add(ship);
+                    StatService.StatEntry se;
+                    if (om.containsKey("stats"))
+                        se = new StatService.StatEntry(om.get("stats"));
+                    else
+                        se = new StatService.StatEntry();
+                    shipStats.add(se);
                 }
             }
+
+            if (json.containsKey("stats"))
+                stats = new StatService.StatEntry(json.get("stats"));
+            else
+                stats = new StatService.StatEntry();
         }
 
         @Override
@@ -124,7 +138,8 @@ public class ProfileService {
             retString += Utils.toJsonProperty("id", id);
             retString += "ships: [";
 
-            for (ShipLoader.JsonShip ship: ships) {
+            for (int i=0; i < ships.size; i++) {
+                ShipLoader.JsonShip ship = ships.get(i);
                 retString += "{";
                 retString += Utils.toJsonProperty("id", ship.id);
                 retString += Utils.toJsonProperty("name", ship.name);
@@ -133,10 +148,16 @@ public class ProfileService {
                     retString += "\"" + emp.emplacement + "\",";
                 }
                 retString += "],";
+
+                retString += Utils.toJsonProperty("stats", shipStats.get(i));
+
                 retString += "},";
             }
 
             retString += "],";
+
+            retString += Utils.toJsonProperty("stats", stats);
+
             retString += "}";
             return retString;
         }
