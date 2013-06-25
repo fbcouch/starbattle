@@ -58,6 +58,14 @@ public class ProfileService {
         selected = id;
     }
 
+    public void updateStats(ShipLoader.JsonShip ship, StatService.StatEntry stats) {
+        Profile p = getSelectedProfile();
+
+        p.stats.add(stats);
+
+        p.shipStats.get(p.ships.indexOf(ship, true)).add(stats);
+    }
+
     public void saveProfiles() {
         PrettyJsonWriter writer = new PrettyJsonWriter(Gdx.files.local("assets/profiles/profiles.json").writer(false));
 

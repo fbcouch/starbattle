@@ -68,6 +68,10 @@ public class StatService {
         return (shotsHit.containsKey(obj) ? shotsHit.get(obj) : 0);
     }
 
+    public StatEntry getStatsForObject(GameObject obj) {
+        return new StatEntry(getDamageTakenBy(obj), getDamageDealtBy(obj), getShotsFiredBy(obj), getShotsHitBy(obj));
+    }
+
     public static class DamageEntry {
         GameObject damager;
         GameObject damaged;
@@ -102,6 +106,14 @@ public class StatService {
             damageDealt = Utils.getFloatProperty(om, "damage-dealt");
             shotsHit = Utils.getIntProperty(om, "shots-hit");
             shotsTaken = Utils.getIntProperty(om, "shots-taken");
+        }
+
+        public StatEntry add(StatEntry other) {
+            damageTaken += other.damageTaken;
+            damageDealt += other.damageDealt;
+            shotsHit += other.shotsHit;
+            shotsTaken += other.shotsTaken;
+            return this;
         }
 
         @Override

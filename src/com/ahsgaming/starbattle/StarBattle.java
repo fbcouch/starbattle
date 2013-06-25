@@ -66,6 +66,10 @@ public class StarBattle extends Game {
         Gdx.app.exit();
     }
 
+    public void showMainMenu() {
+        setScreen(new MainMenuScreen(this));
+    }
+
     public void showOptions() {
         setScreen(new OptionsScreen(this));
     }
@@ -73,6 +77,14 @@ public class StarBattle extends Game {
     public void startLevel() {
         gameController = new GameController(this);
         setScreen(new LevelScreen(this));
+    }
+
+    public void endLevel(Ship playerShip) {
+        StatService.StatEntry se = statService.getStatsForObject(playerShip);
+
+        profileService.updateStats(playerShip.proto, se);
+
+        profileService.saveProfiles();
     }
 
     public TextureService getTextureService() {

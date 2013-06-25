@@ -35,6 +35,8 @@ public class LevelScreen extends AbstractScreen {
     Label damageDealt, damageTaken;
     Label shots;
 
+    float gameOverCountdown = 5.0f;
+
     /**
      * Constructor
      *
@@ -190,6 +192,16 @@ public class LevelScreen extends AbstractScreen {
             shapeRenderer.setColor(1, 1, 1, 1);
             shapeRenderer.rect(mapBounds.x - camera.x, mapBounds.y - camera.y, mapBounds.width, mapBounds.height);
             shapeRenderer.end();
+
+            if (game.getGameController().getGameState() == GameController.GameState.GS_OVER) {
+                gameOverCountdown -= delta;
+                if (gameOverCountdown <= 0) {
+
+                    game.endLevel(playerShip);
+
+                    game.showMainMenu();
+                }
+            }
 
         }
     }

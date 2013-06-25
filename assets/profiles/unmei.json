@@ -12,18 +12,18 @@
       ],
       "stats": 
       {
-        "damage-taken": 0.0,
-        "damage-dealt": 0.0,
-        "shots-hit": 0,
-        "shots-taken": 0,
+        "damage-taken": 200.0,
+        "damage-dealt": 250.0,
+        "shots-hit": 25,
+        "shots-taken": 24,
       },
     },
   ],
   "stats": 
   {
-    "damage-taken": 0.0,
-    "damage-dealt": 0.0,
-    "shots-hit": 0,
-    "shots-taken": 0,
+    "damage-taken": 200.0,
+    "damage-dealt": 250.0,
+    "shots-hit": 25,
+    "shots-taken": 24,
   },
 }
