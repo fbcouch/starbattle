@@ -14,12 +14,14 @@ public class StatService {
     public static final String LOG = "StatService";
 
     Array<DamageEntry> statEntryArray;
+    Array<KillEntry> killEntryArray;
 
     ObjectMap<GameObject, Integer> shotsFired;
     ObjectMap<GameObject, Integer> shotsHit;
 
     public StatService() {
         statEntryArray = new Array<DamageEntry>();
+        killEntryArray = new Array<KillEntry>();
         shotsFired = new ObjectMap<GameObject, Integer>();
         shotsHit = new ObjectMap<GameObject, Integer>();
     }
@@ -38,6 +40,10 @@ public class StatService {
         if (!shotsHit.containsKey(obj))
             shotsHit.put(obj, 0);
         shotsHit.put(obj, shotsHit.get(obj) + 1);
+    }
+
+    public void addKill(GameObject killer, GameObject victim) {
+        killEntryArray.add(new KillEntry(killer, victim));
     }
 
     public void reset() {
@@ -68,8 +74,33 @@ public class StatService {
         return (shotsHit.containsKey(obj) ? shotsHit.get(obj) : 0);
     }
 
+    public int getKillsFor(GameObject obj) {
+        int sum = 0;
+        for (KillEntry ke: killEntryArray)
+            if (ke.killer == obj) sum++;
+        return sum;
+    }
+
+    public int getDeathsFor(GameObject obj) {
+        int sum = 0;
+        for (KillEntry ke: killEntryArray)
+            if (ke.victim == obj) sum++;
+        return sum;
+    }
+
     public StatEntry getStatsForObject(GameObject obj) {
-        return new StatEntry(getDamageTakenBy(obj), getDamageDealtBy(obj), getShotsFiredBy(obj), getShotsHitBy(obj));
+        return new StatEntry(getDamageTakenBy(obj), getDamageDealtBy(obj), getShotsFiredBy(obj), getShotsHitBy(obj),
+                             getKillsFor(obj), getDeathsFor(obj));
+    }
+
+    public static class KillEntry {
+        GameObject killer;
+        GameObject victim;
+
+        public KillEntry(GameObject killer, GameObject victim) {
+            this.killer = killer;
+            this.victim = victim;
+        }
     }
 
     public static class DamageEntry {
@@ -86,17 +117,19 @@ public class StatService {
 
     public static class StatEntry {
         public float damageTaken, damageDealt;
-        public int shotsTaken, shotsHit;
+        public int shotsTaken, shotsHit, kills, deaths;
 
         public StatEntry() {
 
         }
 
-        public StatEntry(float damageTaken, float damageDealt, int shotsTaken, int shotsHit) {
+        public StatEntry(float damageTaken, float damageDealt, int shotsTaken, int shotsHit, int kills, int deaths) {
             this.damageTaken = damageTaken;
             this.damageDealt = damageDealt;
             this.shotsHit = shotsHit;
             this.shotsTaken = shotsTaken;
+            this.kills = kills;
+            this.deaths = deaths;
         }
 
         public StatEntry(Object json) {
@@ -106,6 +139,8 @@ public class StatService {
             damageDealt = Utils.getFloatProperty(om, "damage-dealt");
             shotsHit = Utils.getIntProperty(om, "shots-hit");
             shotsTaken = Utils.getIntProperty(om, "shots-taken");
+            kills = Utils.getIntProperty(om, "kills");
+            deaths = Utils.getIntProperty(om, "deaths");
         }
 
         public StatEntry add(StatEntry other) {
@@ -113,6 +148,8 @@ public class StatService {
             damageDealt += other.damageDealt;
             shotsHit += other.shotsHit;
             shotsTaken += other.shotsTaken;
+            kills += other.kills;
+            deaths += other.deaths;
             return this;
         }
 
@@ -123,6 +160,8 @@ public class StatService {
                     Utils.toJsonProperty("damage-dealt", damageDealt) +
                     Utils.toJsonProperty("shots-hit", shotsHit) +
                     Utils.toJsonProperty("shots-taken", shotsTaken) +
+                    Utils.toJsonProperty("kills", kills) +
+                    Utils.toJsonProperty("deaths", deaths) +
                     "}";
         }
     }

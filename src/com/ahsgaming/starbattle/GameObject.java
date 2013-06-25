@@ -31,6 +31,8 @@ public class GameObject extends Group {
     TextureRegion region;
     Image rootImage;
 
+    GameObject lastDamagedBy;
+
     boolean remove = false;
 
     public GameObject(String image) {
@@ -105,6 +107,7 @@ public class GameObject extends Group {
     }
 
     public float takeDamage(float amount, GameObject from) {
+        lastDamagedBy = from;
         return 0;
     }
 

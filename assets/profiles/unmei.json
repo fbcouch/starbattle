@@ -12,18 +12,22 @@
       ],
       "stats": 
       {
-        "damage-taken": 400.0,
-        "damage-dealt": 430.0,
-        "shots-hit": 43,
-        "shots-taken": 44,
+        "damage-taken": 600.0,
+        "damage-dealt": 520.0,
+        "shots-hit": 52,
+        "shots-taken": 55,
+        "kills": 0,
+        "deaths": 1,
       },
     },
   ],
   "stats": 
   {
-    "damage-taken": 400.0,
-    "damage-dealt": 430.0,
-    "shots-hit": 43,
-    "shots-taken": 44,
+    "damage-taken": 600.0,
+    "damage-dealt": 520.0,
+    "shots-hit": 52,
+    "shots-taken": 55,
+    "kills": 0,
+    "deaths": 1,
   },
 }

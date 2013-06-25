@@ -117,6 +117,8 @@ public class Ship extends GameObject {
         if (curHull <= 0) {
             setRemove(true);
             for (Emplacement emp: emplacements) emp.setRemove(true);
+
+            game.getStatService().addKill(lastDamagedBy, this);
         }
     }
 
