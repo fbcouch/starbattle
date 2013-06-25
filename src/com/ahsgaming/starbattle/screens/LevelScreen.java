@@ -45,11 +45,13 @@ public class LevelScreen extends AbstractScreen {
         bgGroup = new Group();
         playerShip = new Ship(game.getProfileService().getSelectedProfile().ships.first());
         playerShip.init();
+        playerShip.setTeam(1);
         playerShip.setPosition(mapBounds.x, mapBounds.y + (mapBounds.getHeight()- playerShip.getHeight()) * 0.5f);
         game.getGameController().addGameObject(playerShip);
 
         AIShip enemyShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
         enemyShip.init();
+        enemyShip.setTeam(2);
         enemyShip.setPosition(mapBounds.x + mapBounds.width - enemyShip.getWidth(), mapBounds.y + mapBounds.getHeight() * 0.5f - enemyShip.getHeight() * 0.5f);
         enemyShip.setRotation(180);
         game.getGameController().addGameObject(enemyShip);

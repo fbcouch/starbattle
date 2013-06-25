@@ -20,14 +20,31 @@ public class GameController {
     Array<GameObject> gameObjects;
     Group groupObjects;
 
+    Array<GameObject> team1, team2;
+
+    public enum GameState {
+        GS_RUNNING, GS_PAUSED, GS_OVER;
+    }
+
+    GameState gameState;
+
     public GameController(StarBattle game) {
         this.game = game;
 
         gameObjects = new Array<GameObject>();
         groupObjects = new Group();
+
+        gameState = GameState.GS_RUNNING;
     }
 
     public void update(float delta) {
+
+        if (gameState == GameState.GS_OVER || gameState == GameState.GS_PAUSED) {
+            return; // TODO we may want to actually do something here eventually
+        }
+
+        team1 = new Array<GameObject>();
+        team2 = new Array<GameObject>();
         for (GameObject g: gameObjects) {
             // update velocity
             g.getVelocity().add(new Vector2(g.getAcceleration().mul(delta)));
@@ -52,6 +69,21 @@ public class GameController {
 
             if (g.isRemove())
                 removeGameObject(g);
+
+            if (!g.isRemove()) {
+                switch(g.getTeam()) {
+                    case 1:
+                        team1.add(g);
+                        break;
+                    case 2:
+                        team2.add(g);
+                }
+            }
+        }
+
+        if (team1.size == 0 || team2.size == 0) {
+            // gameover!
+            gameState = GameState.GS_OVER;
         }
     }
 
@@ -73,5 +105,13 @@ public class GameController {
 
     public Group getGroupObjects() {
         return groupObjects;
+    }
+
+    public GameState getGameState() {
+        return gameState;
+    }
+
+    public void setGameState(GameState gameState) {
+        this.gameState = gameState;
     }
 }

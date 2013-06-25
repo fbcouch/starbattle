@@ -24,6 +24,8 @@ public class GameObject extends Group {
 
     float maxSpeed, maxAccel, turnSpeed;
 
+    int team;
+
     String image;
 
     TextureRegion region;
@@ -162,6 +164,14 @@ public class GameObject extends Group {
 
     public void setRemove(boolean remove) {
         this.remove = remove;
+    }
+
+    public int getTeam() {
+        return team;
+    }
+
+    public void setTeam(int team) {
+        this.team = team;
     }
 
     public static boolean collideRect(GameObject obj1, GameObject obj2) {
