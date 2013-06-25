@@ -104,8 +104,8 @@ public class GameObject extends Group {
 
     }
 
-    public void takeDamage(float amount) {
-
+    public float takeDamage(float amount, GameObject from) {
+        return 0;
     }
 
     public Vector2 getVelocity() {

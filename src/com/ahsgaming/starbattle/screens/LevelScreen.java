@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
@@ -29,6 +30,10 @@ public class LevelScreen extends AbstractScreen {
     float zoom = 1f;          // change this to zoom (lower = zoom in; higher = zoom out)
 
     Rectangle mapBounds = new Rectangle(0, 0, 1024, 1024);
+
+    // TODO turn this into a fully fledged hud
+    Label damageDealt;
+    Label damageTaken;
 
     /**
      * Constructor
@@ -110,6 +115,14 @@ public class LevelScreen extends AbstractScreen {
         }
 
 
+        damageDealt = new Label("Damage Dealt: 0", getSkin());
+        damageTaken = new Label("Damage Taken: 0", getSkin());
+
+        damageDealt.setPosition(0, 0);
+        damageTaken.setPosition(0, damageDealt.getTop());
+
+        stage.addActor(damageDealt);
+        stage.addActor(damageTaken);
     }
 
     @Override
@@ -131,6 +144,11 @@ public class LevelScreen extends AbstractScreen {
 
         levelGroup.setPosition(-1 * camera.x, -1 * camera.y);
         bgGroup.setPosition(levelGroup.getX(), levelGroup.getY());
+
+        // update HUD
+        damageDealt.setText(String.format("Damage Dealt: %.0f", game.getStatService().getDamageDealtBy(playerShip)));
+        damageTaken.setText(String.format("Damage Taken: %.0f", game.getStatService().getDamageTakenBy(playerShip)));
+
 
         if (game.DEBUG) {
             ShapeRenderer shapeRenderer = new ShapeRenderer();

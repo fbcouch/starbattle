@@ -62,7 +62,7 @@ public class Projectile extends GameObject {
     public void collide(GameObject other) {
         super.collide(other);
 
-        other.takeDamage(damage);
+        other.takeDamage(damage, (this.owner != null ? this.owner : this));
 
         setRemove(true);
     }

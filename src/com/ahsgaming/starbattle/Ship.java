@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.ObjectMap;
 
 import java.util.Random;
 
@@ -148,8 +149,8 @@ public class Ship extends GameObject {
     }
 
     @Override
-    public void takeDamage(float amount) {
-        super.takeDamage(amount);
+    public float takeDamage(float amount, GameObject from) {
+        super.takeDamage(amount, from);
 
         amount -= armor;
         if (amount > 0) {
@@ -159,6 +160,10 @@ public class Ship extends GameObject {
                 curShield = 0;
             }
         }
+
+        game.getStatService().addStat(from, this, amount);
+
+        return amount;
     }
 
     public Array<Emplacement> getEmplacements() {

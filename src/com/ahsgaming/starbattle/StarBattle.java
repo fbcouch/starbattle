@@ -2,6 +2,7 @@ package com.ahsgaming.starbattle;
 
 import com.ahsgaming.starbattle.json.ProfileService;
 import com.ahsgaming.starbattle.json.ShipLoader;
+import com.ahsgaming.starbattle.json.StatService;
 import com.ahsgaming.starbattle.screens.LevelScreen;
 import com.ahsgaming.starbattle.screens.MainMenuScreen;
 import com.ahsgaming.starbattle.screens.OptionsScreen;
@@ -26,6 +27,7 @@ public class StarBattle extends Game {
     ShipLoader shipLoader;
     ProfileService profileService;
     GameController gameController;
+    StatService statService;
 
     FPSLogger fpsLogger;
 
@@ -36,6 +38,7 @@ public class StarBattle extends Game {
         textureService = new TextureService("assets.atlas");
         shipLoader = new ShipLoader("shiplist.json");
         profileService = new ProfileService("profiles.json");
+        statService = new StatService();
 
         setScreen(new MainMenuScreen(this));
 
@@ -86,5 +89,9 @@ public class StarBattle extends Game {
 
     public GameController getGameController() {
         return gameController;
+    }
+
+    public StatService getStatService() {
+        return statService;
     }
 }
