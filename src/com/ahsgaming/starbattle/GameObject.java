@@ -41,7 +41,7 @@ public class GameObject extends Group {
     }
 
     public void init() {
-        region = game.getTextureAtlas().createSprite(image);
+        region = game.getTextureService().createSprite(image);
         this.setBounds(0, 0, region.getRegionWidth(), region.getRegionHeight());
         rootImage = new Image(region);
         setOrigin(rootImage.getWidth() * 0.5f, rootImage.getHeight() * 0.5f);

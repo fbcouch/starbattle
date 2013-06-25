@@ -54,7 +54,7 @@ public class LevelScreen extends AbstractScreen {
         enemyShip.setRotation(180);
         game.getGameController().addGameObject(enemyShip);
 
-        bgImage = game.getTextureAtlas().createSprite("default_background");
+        bgImage = game.getTextureService().createSprite("default_background");
 
         levelGroup = game.getGameController().getGroupObjects();
         camera = new Vector2();

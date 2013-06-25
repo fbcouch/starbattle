@@ -22,7 +22,7 @@ public class StarBattle extends Game {
 
     public static StarBattle starBattle;
 
-    TextureAtlas textureAtlas;
+    TextureService textureService;
     ShipLoader shipLoader;
     ProfileService profileService;
     GameController gameController;
@@ -33,7 +33,7 @@ public class StarBattle extends Game {
     public void create() {
         starBattle = this;
 
-        textureAtlas = new TextureAtlas(Gdx.files.local("assets/assets.atlas"));
+        textureService = new TextureService("assets.atlas");
         shipLoader = new ShipLoader("shiplist.json");
         profileService = new ProfileService("profiles.json");
 
@@ -72,8 +72,8 @@ public class StarBattle extends Game {
         setScreen(new LevelScreen(this));
     }
 
-    public TextureAtlas getTextureAtlas() {
-        return textureAtlas;
+    public TextureService getTextureService() {
+        return textureService;
     }
 
     public ShipLoader getShipLoader() {
