@@ -85,8 +85,41 @@ public class Emplacement extends GameObject {
             theseCoords = convertToParentCoords(theseCoords);
             theseCoords = ((Ship)getParent()).convertToParentCoords(theseCoords);
             targetCoords.sub(theseCoords);
-            float angle = rotateToward(delta, targetCoords, getParent().getRotation()).angle();
-            if (angle - 5 < getRotation() && angle + 5 > getRotation()) {
+
+            // TODO fix this so that the min/max angle are factored into which direction to rotate
+
+            float targetAngle = targetCoords.angle() - getParent().getRotation();
+
+            while (targetAngle > 180) targetAngle -= 360;
+            while (targetAngle < -180) targetAngle += 360;
+
+            float angle = targetAngle - getRotation();
+
+            while (angle > 180) angle -= 360;
+            while (angle < -180) angle += 360;
+
+            if (Math.abs(angle) < turnSpeed * delta) {
+                setRotation(targetAngle);
+            } else {
+                rotate(turnSpeed * delta * (angle > 0 ? 1 : -1));
+            }
+
+            float offset = 0;
+            if (minAngle >= 0) offset = 180;
+
+            while (getRotation() < -180 + offset) rotate(360);
+            while (getRotation() > 180 + offset) rotate(-360);
+
+            if (getRotation() > maxAngle)
+                setRotation(maxAngle);
+
+            if (getRotation() < minAngle)
+                setRotation(minAngle);
+
+            while (getRotation() < -180) rotate(360);
+            while (getRotation() > 180) rotate(-360);
+
+            if (Math.abs(targetAngle - getRotation()) < 5) {
                 if (canFire()) {
                     fire();
                     secSinceLastFire = 0;
