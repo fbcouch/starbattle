@@ -134,6 +134,7 @@ public class ShipLoader {
         public String id = "", name = "", desc = "", image = "", type = "";
         public float turnSpeed, ammo, maxAmmo, ammoRegen, fireRate;
         public String projectile = "";
+        public int originX, originY;
 
         public JsonEmplacement(ObjectMap<String, Object> json) {
             id = Utils.getStringProperty(json, "id");
@@ -147,6 +148,8 @@ public class ShipLoader {
             ammoRegen = Utils.getFloatProperty(json, "ammo-regen");
             fireRate = Utils.getFloatProperty(json, "fire-rate");
             projectile = Utils.getStringProperty(json, "projectile");
+            originX = Utils.getIntProperty(json, "origin-x");
+            originY = Utils.getIntProperty(json, "origin-y");
         }
     }
 

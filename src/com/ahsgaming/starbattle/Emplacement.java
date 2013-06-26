@@ -52,6 +52,11 @@ public class Emplacement extends GameObject {
     @Override
     public void init() {
         super.init();
+
+        if (proto != null) {
+            if (proto.originX != 0 || proto.originY != 0)
+                setOrigin(proto.originX, proto.originY);
+        }
     }
 
     @Override
