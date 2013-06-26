@@ -53,21 +53,33 @@ public class Utils {
 	}
 
     public static String getStringProperty(ObjectMap<String, Object> json, String id) {
+        return getStringProperty(json, id, "");
+    }
+
+    public static String getStringProperty(ObjectMap<String, Object> json, String id, String defaultValue) {
         if (json.containsKey(id))
             return json.get(id).toString();
-        return "";
+        return defaultValue;
     }
 
     public static float getFloatProperty(ObjectMap<String, Object> json, String id) {
+        return getFloatProperty(json, id, 0);
+    }
+
+    public static float getFloatProperty(ObjectMap<String, Object> json, String id, float defaultValue) {
         if (json.containsKey(id))
             return Float.parseFloat(json.get(id).toString());
-        return 0;
+        return defaultValue;
     }
 
     public static int getIntProperty(ObjectMap<String, Object> json, String id) {
+        return getIntProperty(json, id, 0);
+    }
+
+    public static int getIntProperty(ObjectMap<String, Object> json, String id, int defaultValue) {
         if (json.containsKey(id))
             return (int)Float.parseFloat(json.get(id).toString());
-        return 0;
+        return defaultValue;
     }
 	
 	/**

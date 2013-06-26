@@ -19,6 +19,8 @@ public class Emplacement extends GameObject {
     float fireRate, secSinceLastFire;
     float curAmmo, maxAmmo, regenAmmo;
 
+    float minAngle, maxAngle;
+
     ShipLoader.JsonEmplacement proto;
     Array<ShipLoader.JsonProjectile> projectiles;
 
@@ -35,6 +37,8 @@ public class Emplacement extends GameObject {
         maxAmmo = 10;
         regenAmmo = 1;
         projectiles = new Array<ShipLoader.JsonProjectile>();
+        minAngle = -180;
+        maxAngle = 180;
     }
 
     public Emplacement(ShipLoader.JsonEmplacement proto) {
@@ -47,6 +51,7 @@ public class Emplacement extends GameObject {
         curAmmo = proto.ammo;
         regenAmmo = proto.ammoRegen;
         fireRate = proto.fireRate;
+
         for (ShipLoader.JsonEmplacementProjectile jep: proto.projectiles)
             projectiles.add(game.getShipLoader().getJsonProjectile(jep.id));
     }
@@ -59,6 +64,8 @@ public class Emplacement extends GameObject {
             if (proto.originX != 0 || proto.originY != 0)
                 setOrigin(proto.originX, proto.originY);
         }
+
+        setRotation((minAngle + maxAngle) / 2);
     }
 
     @Override
@@ -126,5 +133,10 @@ public class Emplacement extends GameObject {
 
     public float getRangeSq() {
         return (float)Math.pow((projectiles.get(0).maxSpeed * projectiles.get(0).lifetime), 2);
+    }
+
+    public void setAngleConstraint(float min, float max) {
+        minAngle = min;
+        maxAngle = max;
     }
 }

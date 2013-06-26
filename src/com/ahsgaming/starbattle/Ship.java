@@ -82,6 +82,7 @@ public class Ship extends GameObject {
 
         for (ShipLoader.JsonShipEmplacement jse: proto.emplacements) {
             Emplacement e = new Emplacement(game.getShipLoader().getJsonEmplacement(jse.emplacement));
+            e.setAngleConstraint(jse.angleMin, jse.angleMax);
             e.init();
             e.setPosition(jse.x - e.getOriginX(), jse.y - e.getOriginY());
             addEmplacement(e);

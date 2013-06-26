@@ -22,12 +22,16 @@
                 {
                     x: 130,
                     y: 44,
+                    angle-min: -90,
+                    angle-max: 90,
                     fits: ["small"],
                     emplacement: "laser",
                 },
                 {
                     x: 60,
                     y: 44,
+                    angle-min: 90,
+                    angle-max: 270,
                     fits: ["small"],
                     emplacement: "laser",
                 },

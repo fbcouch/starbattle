@@ -163,12 +163,17 @@ public class ShipLoader {
     public static class JsonShipEmplacement {
         public String emplacement = "";
         public float x, y;
+        public float angleMin, angleMax;
         public Array<String> fits;
 
         public JsonShipEmplacement(ObjectMap<String, Object> json) {
             emplacement = Utils.getStringProperty(json, "emplacement");
             x = Utils.getFloatProperty(json, "x");
             y = Utils.getFloatProperty(json, "y");
+
+            angleMin = Utils.getFloatProperty(json, "angle-min", -180);
+            angleMax = Utils.getFloatProperty(json, "angle-max", 180);
+
             fits = new Array<String>();
             if (json.containsKey("fits")) {
                 Array<Object> f = (Array<Object>)json.get("fits");
@@ -181,6 +186,8 @@ public class ShipLoader {
             emplacement = jse.emplacement;
             x = jse.x;
             y = jse.y;
+            angleMin = jse.angleMin;
+            angleMax = jse.angleMax;
             fits = new Array<String>();
             fits.addAll(jse.fits);
         }
