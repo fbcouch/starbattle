@@ -76,6 +76,7 @@ public class ShipLoader {
         public String image = "";
         public float speed, turnSpeed, accel, hull, hullRegen, shield, shieldRegen, armor;
         public Array<JsonShipEmplacement> emplacements;
+        public int cost, bounty;
 
         public JsonShip() {
             emplacements = new Array<JsonShipEmplacement>();
@@ -96,6 +97,8 @@ public class ShipLoader {
             shield = Utils.getFloatProperty(json, "shield");
             shieldRegen = Utils.getFloatProperty(json, "shield-regen");
             armor = Utils.getFloatProperty(json, "armor");
+            cost = Utils.getIntProperty(json, "cost");
+            bounty = Utils.getIntProperty(json, "bounty");
 
             if (json.containsKey("emplacements")) {
                 Array<Object> emps = (Array<Object>)json.get("emplacements");

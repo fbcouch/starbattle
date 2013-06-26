@@ -19,11 +19,11 @@
         [x] create JSON model
         [x] write loader
         [x] load ships using loader
-    [ ] Profile
+    [x] Profile
         [x] create JSON model
         [x] load
         [x] save
-        [ ] Implement $$$
+        [x] Implement $$$
         [x] Track stats
     [x] Basic gameplay
         [x] Player and randomly spawned enemy ship
@@ -49,7 +49,7 @@
     [ ] Assets
         [ ] Multiple backgrounds
         [ ] Ships
-            [ ] Updated sloop
+            [x] Updated sloop
             [ ] Frigate
             [ ] Corvette
             [ ] Destroyer
@@ -61,7 +61,6 @@
             [ ] Turbolaser array
             [ ] Missile bank
             [ ] Shield generator
-    [ ] Online profile service?
 
 #### 2013-07-04
     [ ] Release
