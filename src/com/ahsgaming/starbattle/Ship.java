@@ -120,6 +120,12 @@ public class Ship extends GameObject {
 
             game.getStatService().addKill(lastDamagedBy, this);
         }
+
+        curHull += regenHull * delta;
+        if (curHull > maxHull) curHull = maxHull;
+
+        curShield += regenShield * delta;
+        if (curShield > maxShield) curShield = maxShield;
     }
 
     @Override
