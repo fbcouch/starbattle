@@ -168,6 +168,7 @@ public class ProfileService {
             retString += "],";
 
             retString += Utils.toJsonProperty("stats", stats);
+            retString += Utils.toJsonProperty("money", money);
 
             retString += "}";
             return retString;

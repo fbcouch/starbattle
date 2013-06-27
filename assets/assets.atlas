@@ -11,9 +11,9 @@ laser-green
   index: -1
 sloop
   rotate: false
-  xy: 588, 2
-  size: 100, 45
-  orig: 100, 45
+  xy: 618, 2
+  size: 200, 90
+  orig: 200, 90
   offset: 0, 0
   index: -1
 default_background
@@ -33,7 +33,7 @@ laser-red
 laser
   rotate: false
   xy: 556, 2
-  size: 30, 21
-  orig: 30, 21
+  size: 60, 42
+  orig: 60, 42
   offset: 0, 0
   index: -1

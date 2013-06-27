@@ -157,7 +157,7 @@ public class LevelScreen extends AbstractScreen {
         int shotsHit = game.getStatService().getShotsHitBy(playerShip);
         float accuracy = 0;
         if (shotsFired > 0)
-            accuracy = shotsHit / shotsFired * 100;
+            accuracy = (float)shotsHit / shotsFired * 100f;
 
         shots.setText(String.format("Shots: %d / %d (%.1f%%)", shotsHit, shotsFired, accuracy));
 

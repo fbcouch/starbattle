@@ -82,8 +82,9 @@ public class Ship extends GameObject {
 
         for (ShipLoader.JsonShipEmplacement jse: proto.emplacements) {
             Emplacement e = new Emplacement(game.getShipLoader().getJsonEmplacement(jse.emplacement));
+            e.setAngleConstraint(jse.angleMin, jse.angleMax);
             e.init();
-            e.setPosition(jse.x - e.getWidth() * 0.5f, jse.y - e.getHeight() * 0.5f);
+            e.setPosition(jse.x - e.getOriginX(), jse.y - e.getOriginY());
             addEmplacement(e);
         }
     }
@@ -120,6 +121,12 @@ public class Ship extends GameObject {
 
             game.getStatService().addKill(lastDamagedBy, this);
         }
+
+        curHull += regenHull * delta;
+        if (curHull > maxHull) curHull = maxHull;
+
+        curShield += regenShield * delta;
+        if (curShield > maxShield) curShield = maxShield;
     }
 
     @Override

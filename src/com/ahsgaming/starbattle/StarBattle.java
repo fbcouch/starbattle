@@ -75,6 +75,7 @@ public class StarBattle extends Game {
     }
 
     public void startLevel() {
+        statService.reset();
         gameController = new GameController(this);
         setScreen(new LevelScreen(this));
     }
@@ -83,6 +84,13 @@ public class StarBattle extends Game {
         StatService.StatEntry se = statService.getStatsForObject(playerShip);
 
         profileService.updateStats(playerShip.proto, se);
+
+        // total bounties and add that amount to the player's money
+        int bounty = 0;
+        for (StatService.KillEntry ke: statService.getKillArrayFor(playerShip))
+            if (ke.victim instanceof Ship) bounty += ((Ship)ke.victim).proto.bounty;
+
+        profileService.getSelectedProfile().money += bounty;
 
         profileService.saveProfiles();
     }

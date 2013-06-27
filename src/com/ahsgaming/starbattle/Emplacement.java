@@ -3,6 +3,7 @@ package com.ahsgaming.starbattle;
 import com.ahsgaming.starbattle.json.ShipLoader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,8 +19,10 @@ public class Emplacement extends GameObject {
     float fireRate, secSinceLastFire;
     float curAmmo, maxAmmo, regenAmmo;
 
+    float minAngle, maxAngle;
+
     ShipLoader.JsonEmplacement proto;
-    ShipLoader.JsonProjectile projectile;
+    Array<ShipLoader.JsonProjectile> projectiles;
 
     Ship target;
 
@@ -33,7 +36,9 @@ public class Emplacement extends GameObject {
         curAmmo = 1;
         maxAmmo = 10;
         regenAmmo = 1;
-
+        projectiles = new Array<ShipLoader.JsonProjectile>();
+        minAngle = -180;
+        maxAngle = 180;
     }
 
     public Emplacement(ShipLoader.JsonEmplacement proto) {
@@ -46,12 +51,21 @@ public class Emplacement extends GameObject {
         curAmmo = proto.ammo;
         regenAmmo = proto.ammoRegen;
         fireRate = proto.fireRate;
-        projectile = game.getShipLoader().getJsonProjectile(proto.projectile);
+
+        for (ShipLoader.JsonEmplacementProjectile jep: proto.projectiles)
+            projectiles.add(game.getShipLoader().getJsonProjectile(jep.id));
     }
 
     @Override
     public void init() {
         super.init();
+
+        if (proto != null) {
+            if (proto.originX != 0 || proto.originY != 0)
+                setOrigin(proto.originX, proto.originY);
+        }
+
+        setRotation((minAngle + maxAngle) / 2);
     }
 
     @Override
@@ -71,8 +85,41 @@ public class Emplacement extends GameObject {
             theseCoords = convertToParentCoords(theseCoords);
             theseCoords = ((Ship)getParent()).convertToParentCoords(theseCoords);
             targetCoords.sub(theseCoords);
-            float angle = rotateToward(delta, targetCoords, getParent().getRotation()).angle();
-            if (angle - 5 < getRotation() && angle + 5 > getRotation()) {
+
+            // TODO fix this so that the min/max angle are factored into which direction to rotate
+
+            float targetAngle = targetCoords.angle() - getParent().getRotation();
+
+            while (targetAngle > 180) targetAngle -= 360;
+            while (targetAngle < -180) targetAngle += 360;
+
+            float angle = targetAngle - getRotation();
+
+            while (angle > 180) angle -= 360;
+            while (angle < -180) angle += 360;
+
+            if (Math.abs(angle) < turnSpeed * delta) {
+                setRotation(targetAngle);
+            } else {
+                rotate(turnSpeed * delta * (angle > 0 ? 1 : -1));
+            }
+
+            float offset = 0;
+            if (minAngle >= 0) offset = 180;
+
+            while (getRotation() < -180 + offset) rotate(360);
+            while (getRotation() > 180 + offset) rotate(-360);
+
+            if (getRotation() > maxAngle)
+                setRotation(maxAngle);
+
+            if (getRotation() < minAngle)
+                setRotation(minAngle);
+
+            while (getRotation() < -180) rotate(360);
+            while (getRotation() > 180) rotate(-360);
+
+            if (Math.abs(targetAngle - getRotation()) < 5) {
                 if (canFire()) {
                     fire();
                     secSinceLastFire = 0;
@@ -82,25 +129,31 @@ public class Emplacement extends GameObject {
     }
 
     public boolean canFire() {
-        return (curAmmo >= 1 && secSinceLastFire > fireRate);
+        return (curAmmo >= projectiles.size && secSinceLastFire > fireRate);
     }
 
     public void fire() {
-        GameObject bullet = new Projectile((Ship)getParent(), projectile);
+        for (int i=0;i<projectiles.size;i++) {
+            ShipLoader.JsonProjectile projectile = projectiles.get(i);
+            ShipLoader.JsonEmplacementProjectile jep = proto.projectiles.get(i);
 
-        bullet.setRotation(getRotation() + getParent().getRotation());
+            GameObject bullet = new Projectile((Ship)getParent(), projectile);
 
-        bullet.init();
+            bullet.setRotation(getRotation() + getParent().getRotation());
 
-        game.getStatService().shotFired((GameObject)this.getParent());
+            bullet.init();
 
-        Vector2 bulletOrigin = ((GameObject)getParent()).convertToParentCoords(
-                convertToParentCoords(new Vector2(getWidth(), (getHeight() - bullet.getHeight()) * 0.5f))
-        );
+            game.getStatService().shotFired((GameObject)this.getParent());
 
-        bullet.setPosition(bulletOrigin.x, bulletOrigin.y);
-        game.getGameController().addGameObject(bullet);
-        curAmmo -= 1;
+            Vector2 bulletOrigin = ((GameObject)getParent()).convertToParentCoords(
+                    convertToParentCoords(new Vector2(jep.x, jep.y))
+            );
+
+            bullet.setPosition(bulletOrigin.x, bulletOrigin.y);
+            game.getGameController().addGameObject(bullet);
+            curAmmo -= 1;
+        }
+
     }
 
     public Ship getTarget() {
@@ -112,6 +165,11 @@ public class Emplacement extends GameObject {
     }
 
     public float getRangeSq() {
-        return (float)Math.pow((projectile.maxSpeed * projectile.lifetime), 2);
+        return (float)Math.pow((projectiles.get(0).maxSpeed * projectiles.get(0).lifetime), 2);
+    }
+
+    public void setAngleConstraint(float min, float max) {
+        minAngle = min;
+        maxAngle = max;
     }
 }

@@ -76,6 +76,7 @@ public class ShipLoader {
         public String image = "";
         public float speed, turnSpeed, accel, hull, hullRegen, shield, shieldRegen, armor;
         public Array<JsonShipEmplacement> emplacements;
+        public int cost, bounty;
 
         public JsonShip() {
             emplacements = new Array<JsonShipEmplacement>();
@@ -96,6 +97,8 @@ public class ShipLoader {
             shield = Utils.getFloatProperty(json, "shield");
             shieldRegen = Utils.getFloatProperty(json, "shield-regen");
             armor = Utils.getFloatProperty(json, "armor");
+            cost = Utils.getIntProperty(json, "cost");
+            bounty = Utils.getIntProperty(json, "bounty");
 
             if (json.containsKey("emplacements")) {
                 Array<Object> emps = (Array<Object>)json.get("emplacements");
@@ -130,7 +133,8 @@ public class ShipLoader {
     public static class JsonEmplacement {
         public String id = "", name = "", desc = "", image = "", type = "";
         public float turnSpeed, ammo, maxAmmo, ammoRegen, fireRate;
-        public String projectile = "";
+        public Array<JsonEmplacementProjectile> projectiles;
+        public int originX, originY;
 
         public JsonEmplacement(ObjectMap<String, Object> json) {
             id = Utils.getStringProperty(json, "id");
@@ -143,19 +147,33 @@ public class ShipLoader {
             maxAmmo = Utils.getFloatProperty(json, "max-ammo");
             ammoRegen = Utils.getFloatProperty(json, "ammo-regen");
             fireRate = Utils.getFloatProperty(json, "fire-rate");
-            projectile = Utils.getStringProperty(json, "projectile");
+
+            projectiles = new Array<JsonEmplacementProjectile>();
+            if (json.containsKey("projectiles")) {
+                Array<Object> proj = (Array<Object>)json.get("projectiles");
+                for (Object o: proj)
+                    projectiles.add(new JsonEmplacementProjectile((ObjectMap<String, Object>)o));
+            }
+
+            originX = Utils.getIntProperty(json, "origin-x");
+            originY = Utils.getIntProperty(json, "origin-y");
         }
     }
 
     public static class JsonShipEmplacement {
         public String emplacement = "";
         public float x, y;
+        public float angleMin, angleMax;
         public Array<String> fits;
 
         public JsonShipEmplacement(ObjectMap<String, Object> json) {
             emplacement = Utils.getStringProperty(json, "emplacement");
             x = Utils.getFloatProperty(json, "x");
             y = Utils.getFloatProperty(json, "y");
+
+            angleMin = Utils.getFloatProperty(json, "angle-min", -180);
+            angleMax = Utils.getFloatProperty(json, "angle-max", 180);
+
             fits = new Array<String>();
             if (json.containsKey("fits")) {
                 Array<Object> f = (Array<Object>)json.get("fits");
@@ -168,6 +186,8 @@ public class ShipLoader {
             emplacement = jse.emplacement;
             x = jse.x;
             y = jse.y;
+            angleMin = jse.angleMin;
+            angleMax = jse.angleMax;
             fits = new Array<String>();
             fits.addAll(jse.fits);
         }
@@ -185,6 +205,17 @@ public class ShipLoader {
             accel = Utils.getFloatProperty(json, "accel");
             lifetime = Utils.getFloatProperty(json, "lifetime");
             damage = Utils.getFloatProperty(json, "damage");
+        }
+    }
+
+    public static class JsonEmplacementProjectile {
+        public String id = "";
+        public int x, y;
+
+        public JsonEmplacementProjectile(ObjectMap<String, Object> json) {
+            id = Utils.getStringProperty(json, "id");
+            x = Utils.getIntProperty(json, "x");
+            y = Utils.getIntProperty(json, "y");
         }
     }
 }

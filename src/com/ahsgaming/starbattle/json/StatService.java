@@ -48,6 +48,9 @@ public class StatService {
 
     public void reset() {
         statEntryArray.clear();
+        killEntryArray.clear();
+        shotsFired.clear();
+        shotsHit.clear();
     }
 
     public float getDamageDealtBy(GameObject obj) {
@@ -81,6 +84,13 @@ public class StatService {
         return sum;
     }
 
+    public Array<KillEntry> getKillArrayFor(GameObject obj) {
+        Array<KillEntry> killArray = new Array<KillEntry>();
+        for (KillEntry ke: killEntryArray)
+            if (ke.killer == obj) killArray.add(ke);
+        return killArray;
+    }
+
     public int getDeathsFor(GameObject obj) {
         int sum = 0;
         for (KillEntry ke: killEntryArray)
@@ -94,8 +104,8 @@ public class StatService {
     }
 
     public static class KillEntry {
-        GameObject killer;
-        GameObject victim;
+        public GameObject killer;
+        public GameObject victim;
 
         public KillEntry(GameObject killer, GameObject victim) {
             this.killer = killer;
@@ -104,9 +114,9 @@ public class StatService {
     }
 
     public static class DamageEntry {
-        GameObject damager;
-        GameObject damaged;
-        float amount;
+        public GameObject damager;
+        public GameObject damaged;
+        public float amount;
 
         public DamageEntry(GameObject damager, GameObject damaged, float amount) {
             this.damager = damager;
