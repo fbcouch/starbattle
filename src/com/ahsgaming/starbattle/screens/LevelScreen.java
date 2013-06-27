@@ -63,7 +63,7 @@ public class LevelScreen extends AbstractScreen {
         otherShip.setPosition(mapBounds.x + mapBounds.width - otherShip.getWidth(), mapBounds.y + mapBounds.getHeight() * 0.5f - otherShip.getHeight() * 0.5f);
         otherShip.setRotation(180);
         game.getGameController().addGameObject(otherShip);
-
+                /*
         otherShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
         otherShip.init();
         otherShip.setTeam(2);
@@ -76,7 +76,7 @@ public class LevelScreen extends AbstractScreen {
         otherShip.setTeam(1);
         otherShip.setPosition(mapBounds.x, mapBounds.y + mapBounds.getHeight() * 0.5f - otherShip.getHeight() * 0.5f + 200);
         game.getGameController().addGameObject(otherShip);
-
+        /**/
         bgImage = game.getTextureService().createSprite("default_background");
 
         levelGroup = game.getGameController().getGroupObjects();

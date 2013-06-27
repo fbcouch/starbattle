@@ -114,7 +114,11 @@ public class Emplacement extends GameObject {
             } else if (targetAngle > minAngle) {
                 rotateDir = -1;
             } else {
-                // figure out proper angles
+                if (Math.abs(getAngleDist(maxAngle, targetAngle)) < Math.abs(getAngleDist(maxAngle, targetAngle))) {
+                    rotateDir = 1;
+                } else {
+                    rotateDir = -1;
+                }
             }
         } else if (targetAngle < getRotation()) {
             if (targetAngle > minAngle) {
@@ -122,7 +126,11 @@ public class Emplacement extends GameObject {
             } else if (targetAngle < maxAngle) {
                 rotateDir = 1;
             } else {
-                // figure out proper angles
+                if (Math.abs(getAngleDist(maxAngle, targetAngle)) < Math.abs(getAngleDist(maxAngle, targetAngle))) {
+                    rotateDir = 1;
+                } else {
+                    rotateDir = -1;
+                }
             }
         }
         return rotateDir;
@@ -135,11 +143,7 @@ public class Emplacement extends GameObject {
             rotate(turnSpeed * delta * rotateDir);
         }
 
-        float offset = 0;
-        if (minAngle >= 0) offset = 180;
-
-        while (getRotation() < -180 + offset) rotate(360);
-        while (getRotation() > 180 + offset) rotate(-360);
+        setRotation(clampAngle(getRotation(), (minAngle >= 0 ? 0 : 180)));
 
         if (getRotation() > maxAngle)
             setRotation(maxAngle);
@@ -147,8 +151,7 @@ public class Emplacement extends GameObject {
         if (getRotation() < minAngle)
             setRotation(minAngle);
 
-        while (getRotation() < -180) rotate(360);
-        while (getRotation() > 180) rotate(-360);
+        setRotation(clampAngle(getRotation(), 180));
     }
 
     public boolean canFire() {

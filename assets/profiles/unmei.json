@@ -3,14 +3,12 @@
   ships: 
   [
     {
-      "id": "frigate",
+      "id": "sloop",
       "name": "Lindsay I",
       emplacements: 
       [
         "laser-one",
         "laser-one",
-        "laser-two",
-        "laser-two",
       ],
       "stats": 
       {
