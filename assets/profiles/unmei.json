@@ -8,27 +8,27 @@
       emplacements: 
       [
         "red-laser",
-        "laser",
+        "red-laser",
       ],
       "stats": 
       {
-        "damage-taken": 2150.0,
-        "damage-dealt": 1750.0,
-        "shots-hit": 175,
-        "shots-taken": 183,
-        "kills": 3,
-        "deaths": 7,
+        "damage-taken": 2550.0,
+        "damage-dealt": 2260.0,
+        "shots-hit": 226,
+        "shots-taken": 241,
+        "kills": 4,
+        "deaths": 8,
       },
     },
   ],
   "stats": 
   {
-    "damage-taken": 2150.0,
-    "damage-dealt": 1750.0,
-    "shots-hit": 175,
-    "shots-taken": 183,
-    "kills": 3,
-    "deaths": 7,
+    "damage-taken": 2550.0,
+    "damage-dealt": 2260.0,
+    "shots-hit": 226,
+    "shots-taken": 241,
+    "kills": 4,
+    "deaths": 8,
   },
-  "money": 300,
+  "money": 400,
 }

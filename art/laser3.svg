@@ -14,11 +14,11 @@
    height="512"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="laser3.svg"
-   inkscape:export-filename="/home/jami/workspace/starbattle/art/exported/laser.png"
-   inkscape:export-xdpi="11.52"
-   inkscape:export-ydpi="11.52">
+   inkscape:export-filename="/home/jami/workspace/starbattle/art/exported/laser-three.png"
+   inkscape:export-xdpi="15.21"
+   inkscape:export-ydpi="15.21">
   <defs
      id="defs4">
     <linearGradient
@@ -191,8 +191,8 @@
      showgrid="false"
      inkscape:window-width="1264"
      inkscape:window-height="948"
-     inkscape:window-x="1244"
-     inkscape:window-y="182"
+     inkscape:window-x="654"
+     inkscape:window-y="103"
      inkscape:window-maximized="0"
      gridtolerance="5"
      objecttolerance="10"

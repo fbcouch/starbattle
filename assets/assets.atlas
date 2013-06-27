@@ -11,9 +11,16 @@ laser-green
   index: -1
 sloop
   rotate: false
-  xy: 618, 2
-  size: 200, 90
-  orig: 200, 90
+  xy: 682, 2
+  size: 125, 56
+  orig: 125, 56
+  offset: 0, 0
+  index: -1
+laser-one
+  rotate: false
+  xy: 536, 2
+  size: 40, 28
+  orig: 40, 28
   offset: 0, 0
   index: -1
 default_background
@@ -23,17 +30,24 @@ default_background
   orig: 512, 512
   offset: 0, 0
   index: -1
+laser-two
+  rotate: false
+  xy: 640, 2
+  size: 40, 28
+  orig: 40, 28
+  offset: 0, 0
+  index: -1
 laser-red
   rotate: false
-  xy: 536, 2
+  xy: 578, 2
   size: 18, 2
   orig: 18, 2
   offset: 0, 0
   index: -1
-laser
+laser-three
   rotate: false
-  xy: 556, 2
-  size: 60, 42
-  orig: 60, 42
+  xy: 598, 2
+  size: 40, 34
+  orig: 40, 34
   offset: 0, 0
   index: -1
