@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1af02a52-970c-445b-8139-8ac12b95cb11" name="Default" comment="" />
+    <list default="true" id="1af02a52-970c-445b-8139-8ac12b95cb11" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/assets.png" afterPath="$PROJECT_DIR$/assets/assets.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/art/assets.tps" afterPath="$PROJECT_DIR$/art/assets.tps" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/assets.atlas" afterPath="$PROJECT_DIR$/assets/assets.atlas" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/art/frigate.svg" afterPath="$PROJECT_DIR$/art/frigate.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/shiplist.json" afterPath="$PROJECT_DIR$/assets/shiplist.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/profiles/unmei.json" afterPath="$PROJECT_DIR$/assets/profiles/unmei.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="starbattle.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/StarBattle.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372221540797" ignored="false" />

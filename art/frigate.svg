@@ -14,11 +14,11 @@
    height="512"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
-   sodipodi:docname="sloop.svg"
-   inkscape:export-filename="/home/jami/workspace/starbattle/art/exported/sloop.png"
-   inkscape:export-xdpi="21.1"
-   inkscape:export-ydpi="21.1">
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="frigate.svg"
+   inkscape:export-filename="/home/jami/workspace/starbattle/art/exported/frigate.png"
+   inkscape:export-xdpi="25.35"
+   inkscape:export-ydpi="25.35">
   <defs
      id="defs4">
     <linearGradient
@@ -377,17 +377,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4976415"
-     inkscape:cx="499.90589"
+     inkscape:zoom="3.4082031"
+     inkscape:cx="256"
      inkscape:cy="276.48942"
      inkscape:document-units="px"
      inkscape:current-layer="g3762"
      showgrid="false"
-     inkscape:window-width="2560"
-     inkscape:window-height="1362"
+     inkscape:window-width="1920"
+     inkscape:window-height="1052"
      inkscape:window-x="0"
-     inkscape:window-y="22"
-     inkscape:window-maximized="0" />
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>

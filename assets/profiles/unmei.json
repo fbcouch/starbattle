@@ -3,32 +3,34 @@
   ships: 
   [
     {
-      "id": "sloop",
+      "id": "frigate",
       "name": "Lindsay I",
       emplacements: 
       [
-        "red-laser",
-        "red-laser",
+        "laser-one",
+        "laser-one",
+        "laser-two",
+        "laser-two",
       ],
       "stats": 
       {
-        "damage-taken": 2550.0,
-        "damage-dealt": 2260.0,
-        "shots-hit": 226,
-        "shots-taken": 241,
+        "damage-taken": 2990.0,
+        "damage-dealt": 2720.0,
+        "shots-hit": 272,
+        "shots-taken": 297,
         "kills": 4,
-        "deaths": 8,
+        "deaths": 10,
       },
     },
   ],
   "stats": 
   {
-    "damage-taken": 2550.0,
-    "damage-dealt": 2260.0,
-    "shots-hit": 226,
-    "shots-taken": 241,
+    "damage-taken": 2990.0,
+    "damage-dealt": 2720.0,
+    "shots-hit": 272,
+    "shots-taken": 297,
     "kills": 4,
-    "deaths": 8,
+    "deaths": 10,
   },
   "money": 400,
 }

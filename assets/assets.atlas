@@ -4,21 +4,21 @@ filter: Linear,Linear
 repeat: none
 laser-green
   rotate: false
-  xy: 516, 2
+  xy: 662, 2
   size: 18, 2
   orig: 18, 2
   offset: 0, 0
   index: -1
 sloop
   rotate: false
-  xy: 682, 2
+  xy: 828, 2
   size: 125, 56
   orig: 125, 56
   offset: 0, 0
   index: -1
 laser-one
   rotate: false
-  xy: 536, 2
+  xy: 682, 2
   size: 40, 28
   orig: 40, 28
   offset: 0, 0
@@ -32,21 +32,28 @@ default_background
   index: -1
 laser-two
   rotate: false
-  xy: 640, 2
+  xy: 786, 2
   size: 40, 28
   orig: 40, 28
   offset: 0, 0
   index: -1
+frigate
+  rotate: false
+  xy: 516, 2
+  size: 144, 106
+  orig: 144, 106
+  offset: 0, 0
+  index: -1
 laser-red
   rotate: false
-  xy: 578, 2
+  xy: 724, 2
   size: 18, 2
   orig: 18, 2
   offset: 0, 0
   index: -1
 laser-three
   rotate: false
-  xy: 598, 2
+  xy: 744, 2
   size: 40, 34
   orig: 40, 34
   offset: 0, 0
