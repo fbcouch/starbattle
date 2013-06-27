@@ -81,43 +81,12 @@ public class Emplacement extends GameObject {
             Vector2 targetCoords = new Vector2(target.getX() + target.getOriginX(), target.getY() + target.getOriginY());
             if (this.targetCoords == null) this.targetCoords = new Vector2();
             this.targetCoords.set(targetCoords);
-            Vector2 theseCoords = new Vector2(getOriginX(), getOriginY());
-            theseCoords = convertToParentCoords(theseCoords);
-            theseCoords = ((Ship)getParent()).convertToParentCoords(theseCoords);
-            targetCoords.sub(theseCoords);
 
-            // TODO fix this so that the min/max angle are factored into which direction to rotate
+            float targetAngle = getTargetAngle(targetCoords);
 
-            float targetAngle = targetCoords.angle() - getParent().getRotation();
+            int rotateDir = getRotateDir(targetAngle);
 
-            while (targetAngle > 180) targetAngle -= 360;
-            while (targetAngle < -180) targetAngle += 360;
-
-            float angle = targetAngle - getRotation();
-
-            while (angle > 180) angle -= 360;
-            while (angle < -180) angle += 360;
-
-            if (Math.abs(angle) < turnSpeed * delta) {
-                setRotation(targetAngle);
-            } else {
-                rotate(turnSpeed * delta * (angle > 0 ? 1 : -1));
-            }
-
-            float offset = 0;
-            if (minAngle >= 0) offset = 180;
-
-            while (getRotation() < -180 + offset) rotate(360);
-            while (getRotation() > 180 + offset) rotate(-360);
-
-            if (getRotation() > maxAngle)
-                setRotation(maxAngle);
-
-            if (getRotation() < minAngle)
-                setRotation(minAngle);
-
-            while (getRotation() < -180) rotate(360);
-            while (getRotation() > 180) rotate(-360);
+            clampedRotate(rotateDir, targetAngle, delta);
 
             if (Math.abs(targetAngle - getRotation()) < 5) {
                 if (canFire()) {
@@ -126,6 +95,60 @@ public class Emplacement extends GameObject {
                 }
             }
         }
+    }
+
+    public float getTargetAngle(Vector2 targetCoords) {
+        Vector2 theseCoords = new Vector2(getOriginX(), getOriginY());
+        theseCoords = convertToParentCoords(theseCoords);
+        theseCoords = ((Ship)getParent()).convertToParentCoords(theseCoords);
+        targetCoords.sub(theseCoords);
+
+        return clampAngle(targetCoords.angle() - getParent().getRotation(), 0);
+    }
+
+    public int getRotateDir(float targetAngle) {
+        int rotateDir = 0;
+        if (targetAngle > getRotation()) {
+            if (targetAngle < maxAngle) {
+                rotateDir = 1;
+            } else if (targetAngle > minAngle) {
+                rotateDir = -1;
+            } else {
+                // figure out proper angles
+            }
+        } else if (targetAngle < getRotation()) {
+            if (targetAngle > minAngle) {
+                rotateDir = -1;
+            } else if (targetAngle < maxAngle) {
+                rotateDir = 1;
+            } else {
+                // figure out proper angles
+            }
+        }
+        return rotateDir;
+    }
+
+    public void clampedRotate(int rotateDir, float targetAngle, float delta) {
+        if (Math.abs(targetAngle - getRotation()) < turnSpeed * delta) {
+            setRotation(targetAngle);
+        } else {
+            rotate(turnSpeed * delta * rotateDir);
+        }
+
+        float offset = 0;
+        if (minAngle >= 0) offset = 180;
+
+        while (getRotation() < -180 + offset) rotate(360);
+        while (getRotation() > 180 + offset) rotate(-360);
+
+        if (getRotation() > maxAngle)
+            setRotation(maxAngle);
+
+        if (getRotation() < minAngle)
+            setRotation(minAngle);
+
+        while (getRotation() < -180) rotate(360);
+        while (getRotation() > 180) rotate(-360);
     }
 
     public boolean canFire() {
@@ -171,5 +194,29 @@ public class Emplacement extends GameObject {
     public void setAngleConstraint(float min, float max) {
         minAngle = min;
         maxAngle = max;
+    }
+
+    public static float getAngleDist(float angle1, float angle2) {
+        float dist360 = 0;
+
+        angle1 = clampAngle(angle1, 0);
+        angle2 = clampAngle(angle2, 0);
+
+        dist360 = angle2 - angle1;
+
+        float dist180 = 0;
+
+        angle1 = clampAngle(angle1, 180);
+        angle2 = clampAngle(angle2, 180);
+
+        dist180 = angle2 - angle1;
+
+        return (Math.abs(dist360) < Math.abs(dist180) ? dist360 : dist180);
+    }
+
+    public static float clampAngle(float angle, float offset) {
+        while (angle > 360 - offset) angle -= 360;
+        while (angle < 0 - offset) angle += 360;
+        return angle;
     }
 }
