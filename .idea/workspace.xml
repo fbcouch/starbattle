@@ -2,18 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1af02a52-970c-445b-8139-8ac12b95cb11" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/TestScreen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/Emplacement.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/Emplacement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/tests/EmplacementTests.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/tests/EmplacementTests.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/GameController.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/GameController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/LevelScreen.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/LevelScreen.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/StarBattle.java" afterPath="$PROJECT_DIR$/src/com/ahsgaming/starbattle/StarBattle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/profiles/unmei.json" afterPath="$PROJECT_DIR$/assets/profiles/unmei.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="starbattle.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/StarBattle.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372456511048" ignored="false" />
+    <file path="/StarBattle.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372456609149" ignored="false" />
     <file path="/StarBattleDesktop.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1371241795298" ignored="false" />
     <file path="/fragment.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1372450919799" ignored="false" />
     <file path="/AbstractScreen.java" changelist="1af02a52-970c-445b-8139-8ac12b95cb11" time="1371244007477" ignored="false" />
@@ -114,10 +107,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TestScreen.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="TestScreen.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/TestScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="120" column="33" selection-start="4354" selection-end="4354" vertical-scroll-proportion="0.5165049">
+            <state line="120" column="33" selection-start="4354" selection-end="4354" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -172,10 +165,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StarBattle.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="StarBattle.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/StarBattle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="45" selection-start="911" selection-end="911" vertical-scroll-proportion="0.0">
+            <state line="24" column="44" selection-start="865" selection-end="865" vertical-scroll-proportion="0.25189394">
               <folding />
             </state>
           </provider>
@@ -858,19 +851,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/StarBattle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="45" selection-start="911" selection-end="911" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/screens/TestScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="33" selection-start="4354" selection-end="4354" vertical-scroll-proportion="0.5165049">
+        <state line="120" column="33" selection-start="4354" selection-end="4354" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/ahsgaming/starbattle/StarBattle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="44" selection-start="865" selection-end="865" vertical-scroll-proportion="0.25189394">
+          <folding />
         </state>
       </provider>
     </entry>

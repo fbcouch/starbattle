@@ -22,8 +22,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  */
 public class StarBattle extends Game {
     public static boolean DEBUG = true;
-    public static boolean DEBUG_TEST = true;
-    public static boolean DEBUG_NOFIRE = true;
+    public static boolean DEBUG_TEST = false;
+    public static boolean DEBUG_NOFIRE = false;
 
     public static StarBattle starBattle;
 
