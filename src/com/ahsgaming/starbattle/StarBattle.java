@@ -6,8 +6,10 @@ import com.ahsgaming.starbattle.json.StatService;
 import com.ahsgaming.starbattle.screens.LevelScreen;
 import com.ahsgaming.starbattle.screens.MainMenuScreen;
 import com.ahsgaming.starbattle.screens.OptionsScreen;
+import com.ahsgaming.starbattle.screens.TestScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
@@ -19,7 +21,9 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
  * To change this template use File | Settings | File Templates.
  */
 public class StarBattle extends Game {
-    public static final boolean DEBUG = true;
+    public static boolean DEBUG = true;
+    public static boolean DEBUG_TEST = true;
+    public static boolean DEBUG_NOFIRE = true;
 
     public static StarBattle starBattle;
 
@@ -40,7 +44,10 @@ public class StarBattle extends Game {
         profileService = new ProfileService("profiles.json");
         statService = new StatService();
 
-        setScreen(new MainMenuScreen(this));
+        if (DEBUG_TEST) {
+            startLevel(new TestScreen(this));
+        } else
+            setScreen(new MainMenuScreen(this));
 
         fpsLogger = new FPSLogger();
 
@@ -78,6 +85,12 @@ public class StarBattle extends Game {
         statService.reset();
         gameController = new GameController(this);
         setScreen(new LevelScreen(this));
+    }
+
+    public void startLevel(Screen screen) {
+        statService.reset();
+        gameController = new GameController(this);
+        setScreen(screen);
     }
 
     public void endLevel(Ship playerShip) {

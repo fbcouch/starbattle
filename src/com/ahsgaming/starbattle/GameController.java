@@ -90,7 +90,7 @@ public class GameController {
 
         if (team1.size == 0 || team2.size == 0 || (playerShip != null && playerShip.isRemove())) {
             // gameover!
-            gameState = GameState.GS_OVER;
+            if (!StarBattle.DEBUG_TEST) gameState = GameState.GS_OVER;
         }
     }
 

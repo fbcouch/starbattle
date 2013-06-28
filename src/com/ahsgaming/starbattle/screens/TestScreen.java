@@ -12,16 +12,15 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
 /**
- * Created with IntelliJ IDEA.
- * User: jami
- * Date: 6/14/13
- * Time: 2:59 PM
- * To change this template use File | Settings | File Templates.
+ * starbattle
+ * (c) 2013 Jami Couch
+ * Created on 6/28/13 by jami
+ * ahsgaming.com
  */
-public class LevelScreen extends AbstractScreen {
-    public static final String LOG = "LevelScreen";
+public class TestScreen extends AbstractScreen {
+    public static final String LOG = "TestScreen";
 
-    Ship playerShip;
+    Ship playerShip, targetShip;
     Group levelGroup, bgGroup;
     Vector2 camera;
 
@@ -37,12 +36,16 @@ public class LevelScreen extends AbstractScreen {
 
     float gameOverCountdown = 5.0f;
 
+    float changeTargetTimer = 5.0f;
+
+    float targetAngle = 0;
+
     /**
      * Constructor
      *
      * @param game
      */
-    public LevelScreen(StarBattle game) {
+    public TestScreen(StarBattle game) {
         super(game);
     }
 
@@ -57,49 +60,17 @@ public class LevelScreen extends AbstractScreen {
         game.getGameController().addGameObject(playerShip);
         game.getGameController().setPlayerShip(playerShip);
 
-        AIShip otherShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
-        otherShip.init();
-        otherShip.setTeam(2);
-        otherShip.setPosition(mapBounds.x + mapBounds.width - otherShip.getWidth(), mapBounds.y + mapBounds.getHeight() * 0.5f - otherShip.getHeight() * 0.5f);
-        otherShip.setRotation(180);
-        game.getGameController().addGameObject(otherShip);
+        targetShip = new Ship(game.getProfileService().getSelectedProfile().ships.first());
+        targetShip.init();
+        targetShip.setTeam(2);
+        targetShip.setPosition(mapBounds.x, mapBounds.y + (mapBounds.getHeight()- targetShip.getHeight()) * 0.5f);
+        game.getGameController().addGameObject(targetShip);
 
-        otherShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
-        otherShip.init();
-        otherShip.setTeam(2);
-        otherShip.setPosition(mapBounds.x + mapBounds.width - otherShip.getWidth(), mapBounds.y + mapBounds.getHeight() * 0.5f - otherShip.getHeight() * 0.5f + 200);
-        otherShip.setRotation(180);
-        game.getGameController().addGameObject(otherShip);
-
-        otherShip = new AIShip(game.getShipLoader().getJsonShip("sloop"));
-        otherShip.init();
-        otherShip.setTeam(1);
-        otherShip.setPosition(mapBounds.x, mapBounds.y + mapBounds.getHeight() * 0.5f - otherShip.getHeight() * 0.5f + 200);
-        game.getGameController().addGameObject(otherShip);
-        /**/
         bgImage = game.getTextureService().createSprite("default_background");
 
         levelGroup = game.getGameController().getGroupObjects();
         camera = new Vector2();
 
-        stage.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                super.clicked(event, x, y);
-
-                // handle input
-                playerShip.setMoveTarget(x + camera.x, y + camera.y);
-
-            }
-
-            @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                super.touchUp(event, x, y, pointer, button);
-
-                // handle input
-                playerShip.setMoveTarget(x + camera.x, y + camera.y);
-            }
-        });
     }
 
     @Override
@@ -115,19 +86,6 @@ public class LevelScreen extends AbstractScreen {
                 bgGroup.addActor(i);
             }
         }
-
-
-        damageDealt = new Label("Damage Dealt: 0", getSkin());
-        damageTaken = new Label("Damage Taken: 0", getSkin());
-        shots = new Label("Accuracy: 0/0 (0%)", getSkin());
-
-        damageDealt.setPosition(0, 0);
-        damageTaken.setPosition(0, damageDealt.getTop());
-        shots.setPosition(0, damageTaken.getTop());
-
-        stage.addActor(damageDealt);
-        stage.addActor(damageTaken);
-        stage.addActor(shots);
     }
 
     @Override
@@ -150,16 +108,18 @@ public class LevelScreen extends AbstractScreen {
         levelGroup.setPosition(-1 * camera.x, -1 * camera.y);
         bgGroup.setPosition(levelGroup.getX(), levelGroup.getY());
 
-        // update HUD
-        damageDealt.setText(String.format("Damage Dealt: %.0f", game.getStatService().getDamageDealtBy(playerShip)));
-        damageTaken.setText(String.format("Damage Taken: %.0f", game.getStatService().getDamageTakenBy(playerShip)));
-        int shotsFired = game.getStatService().getShotsFiredBy(playerShip);
-        int shotsHit = game.getStatService().getShotsHitBy(playerShip);
-        float accuracy = 0;
-        if (shotsFired > 0)
-            accuracy = (float)shotsHit / shotsFired * 100f;
+        Vector2 offset = new Vector2(300, 0).rotate(targetAngle * 45);
 
-        shots.setText(String.format("Shots: %d / %d (%.1f%%)", shotsHit, shotsFired, accuracy));
+        targetShip.setPosition(
+                playerShip.getX() + playerShip.getOriginX() + offset.x - targetShip.getOriginX(),
+                playerShip.getY() + playerShip.getOriginY() + offset.y - targetShip.getOriginY()
+        );
+
+        changeTargetTimer -= delta;
+        if (changeTargetTimer <= 0) {
+            targetAngle++;
+            changeTargetTimer = 3;
+        }
 
         if (game.DEBUG) {
             ShapeRenderer shapeRenderer = new ShapeRenderer();
@@ -182,7 +142,7 @@ public class LevelScreen extends AbstractScreen {
                     shapeRenderer.setColor(0, 0, 1, 1);
                     if (obj.getMoveTarget() != null)
                         shapeRenderer.line(obj.getX() + obj.getOriginX() - camera.x, obj.getY() + obj.getOriginY() - camera.y,
-                            obj.getMoveTarget().x - camera.x, obj.getMoveTarget().y - camera.y);
+                                obj.getMoveTarget().x - camera.x, obj.getMoveTarget().y - camera.y);
                     shapeRenderer.end();
 
                 }
@@ -204,9 +164,5 @@ public class LevelScreen extends AbstractScreen {
             }
 
         }
-    }
-
-    public Ship getPlayerShip() {
-        return playerShip;
     }
 }

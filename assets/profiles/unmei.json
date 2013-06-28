@@ -8,27 +8,27 @@
       emplacements: 
       [
         "laser-one",
-        "laser-one",
+        "laser-three",
       ],
       "stats": 
       {
-        "damage-taken": 2990.0,
-        "damage-dealt": 2720.0,
-        "shots-hit": 272,
-        "shots-taken": 297,
-        "kills": 4,
+        "damage-taken": 3140.0,
+        "damage-dealt": 3110.0,
+        "shots-hit": 311,
+        "shots-taken": 347,
+        "kills": 6,
         "deaths": 10,
       },
     },
   ],
   "stats": 
   {
-    "damage-taken": 2990.0,
-    "damage-dealt": 2720.0,
-    "shots-hit": 272,
-    "shots-taken": 297,
-    "kills": 4,
+    "damage-taken": 3140.0,
+    "damage-dealt": 3110.0,
+    "shots-hit": 311,
+    "shots-taken": 347,
+    "kills": 6,
     "deaths": 10,
   },
-  "money": 400,
+  "money": 600,
 }

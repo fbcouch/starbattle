@@ -1,6 +1,7 @@
 package com.ahsgaming.starbattle;
 
 import com.ahsgaming.starbattle.json.ShipLoader;
+import com.ahsgaming.starbattle.screens.LevelScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -86,11 +87,15 @@ public class Emplacement extends GameObject {
 
             int rotateDir = getRotateDir(targetAngle);
 
+            //if (((LevelScreen)game.getScreen()).getPlayerShip() == this.getParent()) {
+                Gdx.app.log(LOG, String.format("targetAngle: %.1f; rotateDir: %d", targetAngle, rotateDir));
+            //} /**/
+
             clampedRotate(rotateDir, targetAngle, delta);
 
-            if (Math.abs(targetAngle - getRotation()) < 5) {
+            if (Math.abs(getAngleDist(getRotation(), targetAngle)) < 5) {
                 if (canFire()) {
-                    fire();
+                    if (!StarBattle.DEBUG_NOFIRE) fire();
                     secSinceLastFire = 0;
                 }
             }
@@ -108,31 +113,25 @@ public class Emplacement extends GameObject {
 
     public int getRotateDir(float targetAngle) {
         int rotateDir = 0;
-        if (targetAngle > getRotation()) {
-            if (targetAngle < maxAngle) {
-                rotateDir = 1;
-            } else if (targetAngle > minAngle) {
+        targetAngle = clampAngle(targetAngle, (minAngle > 0 ? 0 : 0));
+        setRotation(clampAngle(getRotation(), (minAngle > 0 ? 0 : 0)));
+        float angleDiff = getAngleDist(getRotation(), targetAngle);
+
+        Gdx.app.log(LOG, String.format("r: %.1f, tA: %.1f, AngleDiff: %.1f", getRotation(), targetAngle, angleDiff));
+
+        if (angleDiff > 0) {
+            rotateDir = 1;
+            if (getAngleDist(maxAngle, targetAngle) > 0 &&
+                    Math.abs(getAngleDist(maxAngle, targetAngle)) > Math.abs(getAngleDist(minAngle, targetAngle)))
                 rotateDir = -1;
-            } else {
-                if (Math.abs(getAngleDist(maxAngle, targetAngle)) < Math.abs(getAngleDist(maxAngle, targetAngle))) {
-                    rotateDir = 1;
-                } else {
-                    rotateDir = -1;
-                }
-            }
-        } else if (targetAngle < getRotation()) {
-            if (targetAngle > minAngle) {
-                rotateDir = -1;
-            } else if (targetAngle < maxAngle) {
-                rotateDir = 1;
-            } else {
-                if (Math.abs(getAngleDist(maxAngle, targetAngle)) < Math.abs(getAngleDist(maxAngle, targetAngle))) {
-                    rotateDir = 1;
-                } else {
-                    rotateDir = -1;
-                }
-            }
         }
+        else if (angleDiff < 0) {
+            rotateDir = -1;
+            if (getAngleDist(minAngle, targetAngle) < 0 &&
+                    Math.abs(getAngleDist(maxAngle, targetAngle)) < Math.abs(getAngleDist(minAngle, targetAngle)))
+                rotateDir = 1;
+        }
+
         return rotateDir;
     }
 
@@ -218,7 +217,7 @@ public class Emplacement extends GameObject {
     }
 
     public static float clampAngle(float angle, float offset) {
-        while (angle > 360 - offset) angle -= 360;
+        while (angle >= 360 - offset) angle -= 360;
         while (angle < 0 - offset) angle += 360;
         return angle;
     }
