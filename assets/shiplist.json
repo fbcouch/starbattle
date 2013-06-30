@@ -38,6 +38,33 @@
             ],
         },
         {
+            id: "sloop-ii",
+            name: "Improved Sloop",
+            desc: "Small, maneuverable ship. Useful for patrol and recon roles.",
+            image: "sloop-ii",
+            speed: 100,
+            turn-speed: 75,
+            accel: 25,
+            hull: 100,
+            hull-regen: 0,
+            shield: 100,
+            shield-regen: 1,
+            armor: 0,
+            cost: 1000,
+            bounty: 100,
+            emplacements:
+            [
+                {
+                    x: 12,
+                    y: 37,
+                    angle-min: -181,
+                    angle-max: 181,
+                    fits: ["small"],
+                    emplacement: "laser-three",
+                },
+            ],
+        },
+        {
             id: "frigate",
             name: "Frigate",
             desc: "Small, maneuverable ship. Useful for patrol and recon roles.",
