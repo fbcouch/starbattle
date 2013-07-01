@@ -1,6 +1,6 @@
-## STAR BATTLE
+## STAR BATTLE (Omega Battleship Express?)
 
-### CHAPTER 1 (June): The Saga Begins
+### CHAPTER 1 (July): The Saga Begins
 
 #### 2013-06-14
     [x] Initial project setup
@@ -68,6 +68,6 @@
         [ ] Android
         [ ] Web?
 
-### CHAPTER 2 (July): ???
+### CHAPTER 2 (August): ???
     - Online multiplayer (co-op or vs?)
     - Campaign?
